@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>插件列表</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="/static/css/oksub.css">
+	<script type="text/javascript" src="/static/lib/loading/okLoading.js"></script>
+</head>
+<body>
+<div class="ok-body">
+	<!--模糊搜索区域-->
+	<!--数据表格-->
+	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+		<ul class="layui-tab-title">
+			<li class="layui-this">全部插件</li>
+			<li>本地插件</li>
+		</ul>
+
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
+			</div>
+
+			<div class="layui-tab-item">
+				<table class="layui-hide" id="tableIdbd" lay-filter="tableFilter"></table>
+			</div>
+		</div>
+	
+	</div>
+<!--js逻辑-->
+<script src="/static/lib/layui/layui.js"></script>
+<script>
+	layui.use(["element", "jquery", "table", "form", "laydate", "okLayer", "okUtils", "okMock"], function () {
+		let table = layui.table;
+		let form = layui.form;
+		let laydate = layui.laydate;
+		let okLayer = layui.okLayer;
+		let okUtils = layui.okUtils;
+		let okMock = layui.okMock;
+		let $ = layui.jquery;
+
+		okLoading.close($);
+
+		laydate.render({elem: "#startTime", type: "datetime"});
+		laydate.render({elem: "#endTime", type: "datetime"});
+
+		//全部插件
+		let userTable = table.render({
+			elem: '#tableId',
+			url: '{:url("getAllplug")}',
+			cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+			limit: 10000,
+			page: false,
+			toolbar: true,
+			toolbar: "#toolbarTpl",
+			height:'full',
+			cols: [[
+				// {field: "intro", title: "标识", width: 100, sort: true},
+				{field: "title", title: "名称"},
+				{field: "version", title: "版本"},
+				{field: "description", title: "简述"},
+				{field: "author", title: "作者"},
+				{field: "price", title: "价格"},
+				{field: "sales", title: "销量"},
+				{field: "status", title: "状态", templet: "#statusTpl"},
+				
+				{field: "button", title: "操作按钮"},
+			]],
+			done: function (res, curr, count) {
+				console.info(res, curr, count);
+			}
+		});
+
+		//本地插件
+		let userTablebd = table.render({
+			elem: '#tableIdbd',
+			url: '{:url("getList")}',
+		    cellMinWidth: 80, //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+			limit: 10000,
+			page: false,
+			toolbar: true,
+			toolbar: "#toolbarTpl",
+			height:'full',
+			cols: [[
+				//{field: "name", title: "标识", width: 100, sort: true},
+				{field: "title", title: "名称" },
+				{field: "version", title: "版本"},
+				{field: "description", title: "简述"},
+				{field: "author", title: "作者" },
+				
+				{field: "status", title: "状态",  templet: "#statusTpl"},
+				
+				{field: "button",  title: "操作按钮"},
+			]],
+			done: function (res, curr, count) {
+				console.info(res, curr, count);
+			}
+		});
+
+		form.on("submit(search)", function (data) {
+			userTable.reload({
+				where: data.field,
+				page: {curr: 1}
+			});
+			return false;
+		});
+
+		table.on("toolbar(tableFilter)", function (obj) {
+			switch (obj.event) {
+				case "batchEnabled":
+					batchEnabled();
+					break;
+				case "batchDisabled":
+					batchDisabled();
+					break;
+				case "batchDel":
+					batchDel();
+					break;
+				case "add":
+					add();
+					break;
+			}
+		});
+
+		table.on("tool(tableFilter)", function (obj) {
+			let data = obj.data;
+			switch (obj.event) {
+				case "install":
+					install(data.name);
+					break;
+				case "uninstall":
+					uninstall(data.name);
+					break;
+				case "config":
+					config(data.name);
+					break;
+				case "state":
+					state(data.name);
+					break;
+				case "installyuancheng":
+					installyuancheng(data.name);
+					break;
+			}
+		});
+
+		//安装远程插件
+		function installyuancheng(id) {
+			const Storage = {};
+			Storage.get = function(name) {
+				return localStorage.getItem(name);
+			}
+			var mango_tokeny = Storage.get("mangoadmin_userinfo");
+			okLayer.confirm("确定要安装吗？", function () {
+				okUtils.ajax("{:url('installyuancheng')}", "get", {id: id,token: mango_tokeny}, true).done(function (response) {
+					if(response.code=='1'){
+						console.log(response);
+						//userTable.reload();
+						//okUtils.tableSuccessMsg(response.msg);
+						okLayer.greenTickMsg(response.msg, function () {
+						    userTable.reload();
+						    userTablebd.reload();
+						})
+					}else{
+
+						if(response.code =='-3' || response.code =='-4'){
+							//未登录
+							okLayer.redCrossMsg(response.msg, function () {
+								layer.open({
+									type: 2,
+									title: '用户登录',
+									maxmin: true,
+									skin: 'layui-layer-lan',
+									shadeClose: true, //点击遮罩关闭层
+									area : ['600px' , '480px'],
+									content:'/admin/mango/login.html'//弹框显示的url
+								});
+							});
+						}else{
+							okLayer.redCrossMsg(response.msg, function () {
+							})
+						}
+
+
+						if(response.code =='-5'){
+							//未购买
+							okLayer.redCrossMsg(response.msg, function () {
+								var html="<img style='height: 200px;width: 200px;' src='"+ response.data.img +"' >";
+								layer.open({
+									type : 2,
+									title : '请使用手机扫码二维码支付',
+									shade: [0.001, '#393D49'],
+									area : ['500px' , '500px'],
+									// skin : 'layui-layer-nobg', //沒有背景色
+									shadeClose : true,
+									content:'/admin/mango/payqr.html?img='+response.data.code_url +'&order_sn='+response.data.order_sn +'&name='+response.data.name //弹框显示的url
+								});
+							});
+						}else{
+							okLayer.redCrossMsg(response.msg, function () {
+							})
+						}
+						
+					}
+					
+				}).fail(function (error) {
+					console.log(error)
+				});
+			})
+		}
+	
+		//安装本地插件
+		function install(id) {
+			okLayer.confirm("确定要安装吗？", function () {
+				okUtils.ajax("{:url('install')}", "get", {id: id}, true).done(function (response) {
+					if(response.code==1){
+						console.log(response);
+						//userTable.reload();
+						//okUtils.tableSuccessMsg(response.msg);
+						okLayer.greenTickMsg(response.msg, function () {
+						    userTable.reload();
+						    userTablebd.reload();
+						})
+					}else{
+						okLayer.redCrossMsg(response.msg, function () {
+					        
+					    })
+					}
+					
+				}).fail(function (error) {
+					console.log(error)
+				});
+			})
+		}
+
+		function config(id) {
+			okLayer.open("配置", "config?name="+id, "90%", "90%", function (layero) {
+				//let iframeWin = window[layero.find("iframe")[0]["name"]];
+				//iframeWin.initForm(data);
+			}, function () {
+				userTable.reload();
+				userTablebd.reload();
+			})
+		}
+
+		function uninstall(id) {
+			okLayer.confirm("确定要卸载安装吗？", function () {
+				okUtils.ajax("{:url('uninstall')}", "get", {id: id}, true).done(function (response) {
+					if(response.code==1){
+						console.log(response);
+						//userTable.reload();
+						//okUtils.tableSuccessMsg(response.msg);
+						okLayer.greenTickMsg(response.msg, function () {
+						    userTable.reload();
+						    userTablebd.reload();
+						})
+					}else{
+						okLayer.greenTickMsg(response.msg, function () {
+					        
+					    })
+					}
+					
+				}).fail(function (error) {
+					console.log(error)
+				});
+			})
+		}
+		function state(id) {
+			okLayer.confirm("确定执行此操作吗？", function () {
+				okUtils.ajax("{:url('state')}", "get", {id: id}, true).done(function (response) {
+					if(response.code==1){
+						console.log(response);
+						//userTable.reload();
+						//okUtils.tableSuccessMsg(response.msg);
+						okLayer.greenTickMsg(response.msg, function () {
+						    userTable.reload();
+						    userTablebd.reload();
+						})
+					}else{
+						okLayer.greenTickMsg(response.msg, function () {
+					        
+					    })
+					}
+					
+				}).fail(function (error) {
+					console.log(error)
+				});
+			})
+		}
+	})
+</script>
+<!-- 头工具栏模板 -->
+<script type="text/html" id="toolbarTpl">
+	<div class="layui-btn-container">
+		
+	</div>
+</script>
+<!-- 行工具栏模板 -->
+
+
+<script type="text/html" id="statusTpl">
+	{{#  if(d.status == 1){ }}
+	<span class="layui-btn layui-btn-normal layui-btn-xs">启用</span>
+	{{#  } else if(d.status != 1) { }}
+	<span class="layui-btn layui-btn-warm layui-btn-xs">停用</span>
+	{{#  } }}
+</script>
+
+
+</body>
+</html>
