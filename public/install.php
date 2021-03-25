@@ -239,7 +239,7 @@ function parseSql($sql = '', $to, $from)
 function install($username, $password, $config, $adminUrl)
 {
     $sqlPath = file_get_contents(INSTALL_PATH . 'sql' . DS . 'install.sql');
-    $sqlArray = parseSql($sqlPath, $config['prefix'], 'ea_');
+    $sqlArray = parseSql($sqlPath, $config['prefix'], 'm_');
     Db::startTrans();
     try {
         foreach ($sqlArray as $vo) {
@@ -455,7 +455,7 @@ EOT;
             <div class="layui-form-item">
                 <label class="layui-form-label">数据表前缀</label>
                 <div class="layui-input-block">
-                    <input class="layui-input" name="prefix" autocomplete="off" lay-verify="required" lay-reqtext="请输入数据表前缀" placeholder="请输入数据表前缀" value="ea_">
+                    <input class="layui-input" name="prefix" autocomplete="off" lay-verify="required" lay-reqtext="请输入数据表前缀" placeholder="请输入数据表前缀" value="m_">
                 </div>
             </div>
 
