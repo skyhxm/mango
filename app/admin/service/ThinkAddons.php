@@ -240,6 +240,7 @@ class ThinkAddons
     // 安装插件
     public function install(string $name)
     {
+        // dump($name);die;
         // 实例化插件
         $object = $this->getInstance($name);
         if ($object == false) {

@@ -341,7 +341,7 @@ class Plugin extends AdminController
             foreach ($list as $key => $value) {
                 // 增加右侧按钮组
                 $str   = '';
-                $file  = $value['describe_content'];
+                $file  =  $value['name'];
                 $class = "\\addons\\{$file}\\Plugin";
                 if (class_exists($class)) {
                     // 容器类的工作由think\Container类完成，但大多数情况我们只需要通过app助手函数或者think\App类即可容器操作
@@ -364,7 +364,7 @@ class Plugin extends AdminController
 
                     $list[$key]['button'] = $str;
                     $list[$key]['status'] = $info['status'];
-                    $list[$key]['name']   = $value['describe_content']; //插件识别标识
+                    $list[$key]['name']   = $value['name']; //插件识别标识
                     $list[$key]['title']  = $value['title'];
                 } else {
                     //本地没安装此插件跳出
@@ -372,11 +372,11 @@ class Plugin extends AdminController
                     $str = '<a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:void(0)" data-name="' . $file . '" lay-event="installyuancheng"><i class="fa fa-edit"></i> 安装</a>';
 
                     $list[$key]['status']  = 0;
-                    $list[$key]['name']    = $value['title']; //插件识别标识
+                    $list[$key]['name']    = $value['name']; //插件识别标识
                     $list[$key]['title']   = $value['title'];
                     $list[$key]['button']  = $str;
                     $list[$key]['sales']   = $value['sales'];
-                    $list[$key]['version'] = $value['version_content'];
+                    $list[$key]['version'] = $value['version'];
                     continue;
                 }
             }
@@ -406,6 +406,7 @@ class Plugin extends AdminController
 
         // 远程下载插件
         $tmpFile = $this->download($id, ['token' => $caomei_tokeny, 'pay_type' => $pay_type]);
+        // dump($tmpFile);die;
         if ($tmpFile['code'] != '1') {
             return json($tmpFile);
         }
@@ -433,9 +434,7 @@ class Plugin extends AdminController
         if (!is_dir($addonTmpDir)) {
             @mkdir($addonTmpDir, 0755, true);
         }
-
         $tmpFile = $addonTmpDir . $name . ".zip";
-
         $options = [
             CURLOPT_CONNECTTIMEOUT => 30,
             CURLOPT_TIMEOUT        => 30,
@@ -444,14 +443,17 @@ class Plugin extends AdminController
                 'X-REQUESTED-WITH: XMLHttpRequest',
             ],
         ];
-        $ret = Http::sendRequest(self::getServerUrl() . '/api/plug/xiazai', array_merge(['name' => $name], $extend), 'GET', $options);
+        $ret = Http::sendRequest(self::getServerUrl() . '/api/plug/down', array_merge(['name' => $name], $extend), 'GET', $options);
+
+        // dump($ret);die;
         if ($ret['ret']) {
             if (substr($ret['msg'], 0, 1) == '{') {
                 $json = (array) json_decode($ret['msg'], true);
                 //如果传回的是一个下载链接,则再次下载
-                if (isset($json['data']) && isset($json['data']['url'])) {
+                if (isset($json['data']) && isset($json['data']['file'])) {
                     array_pop($options);
-                    $ret = Http::sendRequest($json['data']['url'], array_merge(['name' => $name], $extend), 'GET', $options);
+                    $ret = Http::sendRequest(self::getServerUrl() . $json['data']['file'], 
+                    array_merge(['name' => $name], $extend), 'GET', $options);
                     if (!$ret['ret']) {
                         //下载返回错误，抛出异常
                         return ['msg' => $json['msg'], 'code' => $json['code'], 'data' => $json['data']];
@@ -461,6 +463,7 @@ class Plugin extends AdminController
                     return $json;
                 }
             }
+            // dump($tmpFile);die;
             if ($write = fopen($tmpFile, 'w')) {
                 fwrite($write, $ret['msg']);
                 fclose($write);
@@ -507,6 +510,8 @@ class Plugin extends AdminController
      */
     protected static function getServerUrl()
     {
+        //测试域名
+        // return 'http://ruan.cn';
         return 'https://ruanzubao.com';
     }
 }

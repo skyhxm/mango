@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80020
 File Encoding         : 65001
 
-Date: 2021-04-23 10:29:53
+Date: 2021-05-09 16:18:35
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -142,7 +142,7 @@ CREATE TABLE `m_system_admin` (
 -- ----------------------------
 -- Records of m_system_admin
 -- ----------------------------
-INSERT INTO `m_system_admin` VALUES ('1', null, '/static/admin/images/head.jpg', 'admin', 'ed696eb5bba1f7460585cc6975e6cf9bf24903dd', null, '', '41', '0', '1', '1615542339', '1619143323', null);
+INSERT INTO `m_system_admin` VALUES ('1', null, '/static/admin/images/head.jpg', 'admin', 'ed696eb5bba1f7460585cc6975e6cf9bf24903dd', null, '', '61', '0', '1', '1615542339', '1620546712', null);
 
 -- ----------------------------
 -- Table structure for m_system_auth
@@ -324,7 +324,7 @@ CREATE TABLE `m_system_log_202104` (
   `useragent` varchar(255) DEFAULT '' COMMENT 'User-Agent',
   `create_time` int DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=748 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='后台操作日志表 - 202104';
+) ENGINE=InnoDB AUTO_INCREMENT=781 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='后台操作日志表 - 202104';
 
 -- ----------------------------
 -- Records of m_system_log_202104
@@ -447,6 +447,69 @@ INSERT INTO `m_system_log_202104` VALUES ('744', '1', '/admin/login/index', 'pos
 INSERT INTO `m_system_log_202104` VALUES ('745', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"ccfm\",\"keep_login\":\"0\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619143173');
 INSERT INTO `m_system_log_202104` VALUES ('746', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"ccfm\",\"keep_login\":\"0\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619143317');
 INSERT INTO `m_system_log_202104` VALUES ('747', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"hp5u\",\"keep_login\":\"0\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619143323');
+INSERT INTO `m_system_log_202104` VALUES ('748', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"btmf\",\"keep_login\":\"0\"}', '221.219.193.208', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.190 Safari/537.36', '1619148038');
+INSERT INTO `m_system_log_202104` VALUES ('749', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"ufah\",\"keep_login\":\"0\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619148084');
+INSERT INTO `m_system_log_202104` VALUES ('750', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"tcgk\",\"keep_login\":\"0\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619148305');
+INSERT INTO `m_system_log_202104` VALUES ('751', '1', '/admin/mall.goods/delete?id=9', 'post', '', '{\"id\":\"9\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619148476');
+INSERT INTO `m_system_log_202104` VALUES ('752', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"rbdw\",\"keep_login\":\"0\"}', '58.210.4.122', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.72 Safari/537.36 Edg/90.0.818.42', '1619148581');
+INSERT INTO `m_system_log_202104` VALUES ('753', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"ycuc\",\"keep_login\":\"0\"}', '117.158.195.32', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/81.0.4044.122 Safari/537.36', '1619524543');
+INSERT INTO `m_system_log_202104` VALUES ('754', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"pg8z\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619573759');
+INSERT INTO `m_system_log_202104` VALUES ('755', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"afpx\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619663119');
+INSERT INTO `m_system_log_202104` VALUES ('756', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"afpx\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619663120');
+INSERT INTO `m_system_log_202104` VALUES ('757', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"ciah\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619663125');
+INSERT INTO `m_system_log_202104` VALUES ('758', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"kcjd\",\"keep_login\":\"1\"}', '65.49.38.149', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619666128');
+INSERT INTO `m_system_log_202104` VALUES ('759', '1', '/admin/addons/login_page/back/modify', 'post', '', '{\"id\":\"3\",\"field\":\"status\",\"value\":\"1\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619666257');
+INSERT INTO `m_system_log_202104` VALUES ('760', '1', '/admin/addons/login_page/back/modify', 'post', '', '{\"id\":\"3\",\"field\":\"status\",\"value\":\"1\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619666339');
+INSERT INTO `m_system_log_202104` VALUES ('761', '1', '/admin/addons/login_page/back/modify', 'post', '', '{\"id\":\"3\",\"field\":\"status\",\"value\":\"1\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619666340');
+INSERT INTO `m_system_log_202104` VALUES ('762', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"3a4ef15800b8b4104c42e935b566761f8c255065\",\"captcha\":\"nebm\",\"keep_login\":\"0\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36', '1619668588');
+INSERT INTO `m_system_log_202104` VALUES ('763', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"7lhc\",\"keep_login\":\"0\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36', '1619668598');
+INSERT INTO `m_system_log_202104` VALUES ('764', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"vqea\",\"keep_login\":\"0\"}', '27.17.135.52', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619668628');
+INSERT INTO `m_system_log_202104` VALUES ('765', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\" tmhi\",\"keep_login\":\"1\"}', '110.53.222.161', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 SocketLog(tabid=2566&client_id=zoudingyong_zfH5NbLn)', '1619677903');
+INSERT INTO `m_system_log_202104` VALUES ('766', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"8hqw\",\"keep_login\":\"1\"}', '110.53.222.161', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 SocketLog(tabid=2566&client_id=zoudingyong_zfH5NbLn)', '1619677908');
+INSERT INTO `m_system_log_202104` VALUES ('767', '1', '/admin/ajax/upload', 'post', '', '[]', '110.53.222.161', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 SocketLog(tabid=2566&client_id=zoudingyong_zfH5NbLn)', '1619678020');
+INSERT INTO `m_system_log_202104` VALUES ('768', '1', '/admin/system.node/refreshNode?force=0', 'post', '', '{\"force\":\"0\"}', '110.53.222.161', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.85 Safari/537.36 SocketLog(tabid=2566&client_id=zoudingyong_zfH5NbLn)', '1619678149');
+INSERT INTO `m_system_log_202104` VALUES ('769', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"ynvg\",\"keep_login\":\"0\"}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619752557');
+INSERT INTO `m_system_log_202104` VALUES ('770', '1', '/admin/mall.cate/modify', 'post', '', '{\"id\":\"11\",\"field\":\"status\",\"value\":\"0\"}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619752643');
+INSERT INTO `m_system_log_202104` VALUES ('771', '1', '/admin/mall.cate/modify', 'post', '', '{\"id\":\"11\",\"field\":\"status\",\"value\":\"0\"}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619752644');
+INSERT INTO `m_system_log_202104` VALUES ('772', '1', '/admin/mall.cate/modify', 'post', '', '{\"id\":\"10\",\"field\":\"status\",\"value\":\"0\"}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619752648');
+INSERT INTO `m_system_log_202104` VALUES ('773', '1', '/admin/mall.cate/modify', 'post', '', '{\"id\":\"9\",\"field\":\"status\",\"value\":\"0\"}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619752649');
+INSERT INTO `m_system_log_202104` VALUES ('774', '1', '/admin/system.uploadfile/delete?id=316', 'post', '', '{\"id\":\"316\"}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619752991');
+INSERT INTO `m_system_log_202104` VALUES ('775', '1', '/admin/system.uploadfile/delete?id=317', 'post', '', '{\"id\":\"317\"}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619752995');
+INSERT INTO `m_system_log_202104` VALUES ('776', '1', '/admin/system.uploadfile/delete', 'post', '', '{\"id\":[\"323\"]}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619753004');
+INSERT INTO `m_system_log_202104` VALUES ('777', '1', '/admin/ajax/upload', 'post', '', '[]', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619753025');
+INSERT INTO `m_system_log_202104` VALUES ('778', '1', '/admin/ajax/upload', 'post', '', '[]', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619753036');
+INSERT INTO `m_system_log_202104` VALUES ('779', '1', '/admin/system.uploadfile/delete?id=324', 'post', '', '{\"id\":\"324\"}', '1.80.147.172', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1619753047');
+INSERT INTO `m_system_log_202104` VALUES ('780', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"tyhk\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1619769357');
+
+-- ----------------------------
+-- Table structure for m_system_log_202105
+-- ----------------------------
+DROP TABLE IF EXISTS `m_system_log_202105`;
+CREATE TABLE `m_system_log_202105` (
+  `id` int unsigned NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `admin_id` int unsigned DEFAULT '0' COMMENT '管理员ID',
+  `url` varchar(1500) NOT NULL DEFAULT '' COMMENT '操作页面',
+  `method` varchar(50) NOT NULL COMMENT '请求方法',
+  `title` varchar(100) DEFAULT '' COMMENT '日志标题',
+  `content` text NOT NULL COMMENT '内容',
+  `ip` varchar(50) NOT NULL DEFAULT '' COMMENT 'IP',
+  `useragent` varchar(255) DEFAULT '' COMMENT 'User-Agent',
+  `create_time` int DEFAULT NULL COMMENT '操作时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=639 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='后台操作日志表 - 202105';
+
+-- ----------------------------
+-- Records of m_system_log_202105
+-- ----------------------------
+INSERT INTO `m_system_log_202105` VALUES ('630', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"mpgs\",\"keep_login\":\"0\"}', '183.22.29.168', 'Mozilla/5.0 (Windows NT 10.0; WOW64; Trident/7.0; rv:11.0) like Gecko', '1619856132');
+INSERT INTO `m_system_log_202105` VALUES ('631', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"jrnu\",\"keep_login\":\"0\"}', '182.100.130.241', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1620146959');
+INSERT INTO `m_system_log_202105` VALUES ('632', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"fqup\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1620288008');
+INSERT INTO `m_system_log_202105` VALUES ('633', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"dr2k\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.25 Safari/537.36 Core/1.70.3775.400 QQBrowser/10.6.4208.400', '1620288311');
+INSERT INTO `m_system_log_202105` VALUES ('634', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"nyjh\",\"keep_login\":\"0\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36 Edg/90.0.818.51', '1620288384');
+INSERT INTO `m_system_log_202105` VALUES ('635', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"26aw\",\"keep_login\":\"0\"}', '51.81.35.164', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.93 Safari/537.36', '1620293731');
+INSERT INTO `m_system_log_202105` VALUES ('636', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"jfv7\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1620546699');
+INSERT INTO `m_system_log_202105` VALUES ('637', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"jfv7\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1620546702');
+INSERT INTO `m_system_log_202105` VALUES ('638', null, '/admin/login/index', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"5d8k\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1620546712');
 
 -- ----------------------------
 -- Table structure for m_system_menu
@@ -470,26 +533,27 @@ CREATE TABLE `m_system_menu` (
   PRIMARY KEY (`id`),
   KEY `title` (`title`),
   KEY `href` (`href`)
-) ENGINE=InnoDB AUTO_INCREMENT=331 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=348 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统菜单表';
 
 -- ----------------------------
 -- Records of m_system_menu
 -- ----------------------------
-INSERT INTO `m_system_menu` VALUES ('1', '0', '插件管理', 'fa fa-list', '', '', '_self', '0', '1', null, '', '1617938576', '1617938576', null);
+INSERT INTO `m_system_menu` VALUES ('1', '0', '插件管理', 'fa fa-list', '', '', '_self', '2', '1', null, '', '1617938576', '1617938576', null);
 INSERT INTO `m_system_menu` VALUES ('227', '99999999', '后台首页', 'fa fa-home', 'index/welcome', '', '_self', '0', '1', null, '', null, '1573120497', null);
-INSERT INTO `m_system_menu` VALUES ('228', '0', '系统管理', 'fa fa-cog', '', '', '_self', '0', '1', '', '', null, '1588999529', null);
+INSERT INTO `m_system_menu` VALUES ('228', '0', '系统管理', 'fa fa-cog', '', '', '_self', '1', '1', '', '', null, '1588999529', null);
 INSERT INTO `m_system_menu` VALUES ('234', '228', '菜单管理', 'fa fa-tree', 'system.menu/index', '', '_self', '10', '1', '', '', null, '1588228555', null);
 INSERT INTO `m_system_menu` VALUES ('244', '228', '管理员管理', 'fa fa-user', 'system.admin/index', '', '_self', '12', '1', '', '', '1573185011', '1588228573', null);
 INSERT INTO `m_system_menu` VALUES ('245', '228', '角色管理', 'fa fa-bitbucket-square', 'system.auth/index', '', '_self', '11', '1', '', '', '1573435877', '1588228634', null);
 INSERT INTO `m_system_menu` VALUES ('246', '228', '节点管理', 'fa fa-list', 'system.node/index', '', '_self', '9', '1', '', '', '1573435919', '1588228648', null);
 INSERT INTO `m_system_menu` VALUES ('247', '228', '配置管理', 'fa fa-asterisk', 'system.config/index', '', '_self', '8', '1', '', '', '1573457448', '1588228566', null);
 INSERT INTO `m_system_menu` VALUES ('248', '228', '上传管理', 'fa fa-arrow-up', 'system.uploadfile/index', '', '_self', '0', '1', '', '', '1573542953', '1588228043', null);
-INSERT INTO `m_system_menu` VALUES ('249', '0', '商城管理', 'fa fa-list', '', '', '_self', '0', '1', '', '', '1589439884', '1589439884', null);
+INSERT INTO `m_system_menu` VALUES ('249', '0', '商城管理', 'fa fa-list', '', '', '_self', '3', '1', '', '', '1589439884', '1589439884', null);
 INSERT INTO `m_system_menu` VALUES ('250', '249', '商品分类', 'fa fa-calendar-check-o', 'mall.cate/index', '', '_self', '0', '1', '', '', '1589439910', '1589439966', null);
 INSERT INTO `m_system_menu` VALUES ('251', '249', '商品管理', 'fa fa-list', 'mall.goods/index', '', '_self', '0', '1', '', '', '1589439931', '1589439942', null);
 INSERT INTO `m_system_menu` VALUES ('252', '228', '快捷入口', 'fa fa-list', 'system.quick/index', '', '_self', '0', '1', '', '', '1589623683', '1589623683', null);
 INSERT INTO `m_system_menu` VALUES ('253', '228', '日志管理', 'fa fa-connectdevelop', 'system.log/index', '', '_self', '0', '1', '', '', '1589623684', '1589623684', null);
 INSERT INTO `m_system_menu` VALUES ('254', '228', '插件管理', 'fa fa-android', 'system.plugin/index', '', '_self', '0', '1', '插件管理模块', '', '1615677684', '1615677927', null);
+INSERT INTO `m_system_menu` VALUES ('343', '1', '登录页面', 'fa fa-list', '/addons/login_page/back/index', '', '_self', '0', '1', null, 'login_page', '1619147352', '1619147352', null);
 
 -- ----------------------------
 -- Table structure for m_system_node
@@ -632,7 +696,7 @@ CREATE TABLE `m_system_uploadfile` (
   PRIMARY KEY (`id`),
   KEY `upload_type` (`upload_type`),
   KEY `original_name` (`original_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=323 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='上传文件表';
+) ENGINE=InnoDB AUTO_INCREMENT=325 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='上传文件表';
 
 -- ----------------------------
 -- Records of m_system_uploadfile
@@ -644,6 +708,8 @@ INSERT INTO `m_system_uploadfile` VALUES ('319', 'local', '1294681.png', 'http:/
 INSERT INTO `m_system_uploadfile` VALUES ('320', 'local', 'aliyun.png', 'http://mango.cn/upload/20210409/2d87e02a0ad56c04fafd3de32a53dfa1.png', '', '', '', '0', 'image/png', '0', 'png', '', '1617972344', null, null);
 INSERT INTO `m_system_uploadfile` VALUES ('321', 'local', 'aliyun.png', 'http://mango.cn/upload/20210409/332dd71a3049b9834ffae81e121b0b74.png', '', '', '', '0', 'image/png', '0', 'png', '', '1617973839', null, null);
 INSERT INTO `m_system_uploadfile` VALUES ('322', 'local', 't_031.jpg', 'http://test.ruanzubao.com/upload/20210414/8465623efd021f6b5c6729109132addd.jpg', '', '', '', '0', 'image/jpeg', '0', 'jpg', '', '1618369703', null, null);
+INSERT INTO `m_system_uploadfile` VALUES ('323', 'local', '4564565.jpg', 'http://test.ruanzubao.com/upload/20210429/e263794b872b2ba0cb25c42beca5f539.jpg', '', '', '', '0', 'image/jpeg', '0', 'jpg', '', '1619678020', null, null);
+INSERT INTO `m_system_uploadfile` VALUES ('324', 'local', 'gecclogo.png', 'http://test.ruanzubao.com/upload/20210430/1efce2dc0ba197ef9252f2677faef71d.png', '', '', '', '0', 'image/png', '0', 'png', '', '1619753036', null, null);
 
 -- ----------------------------
 -- Table structure for m_text_addondownload
