@@ -91,4 +91,4 @@
  
 开源项目不易，若此项目能得到你的青睐，可以捐赠支持作者持续开发与维护，感谢所有支持开源的朋友。
 
-<img src="https://ruanzubao.com/donate_qrcode.png" width = "200px" height = "236px" div align=left />
+<img src="https://ruanzubao.com/donate_qrcode.png" width = "200px" height = "237px" div align=left />
