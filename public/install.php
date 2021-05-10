@@ -21,7 +21,7 @@ function isReadWrite($file)
     if (DIRECTORY_SEPARATOR == '\\') {
         return true;
     }
-    if (DIRECTORY_SEPARATOR == '/' && @ ini_get("safe_mode") === false) {
+    if (DIRECTORY_SEPARATOR == '/' && @ini_get("safe_mode") === false) {
         return is_writable($file);
     }
     if (!is_file($file) || ($fp = @fopen($file, "r+")) === false) {
@@ -50,16 +50,16 @@ if (is_file(INSTALL_PATH . 'lock' . DS . 'install.lock')) {
 if (isAjax()) {
     $post = $_POST;
 
-    $cover = $post['cover'] == 1 ? true : false;
-    $database = $post['database'];
-    $hostname = $post['hostname'];
-    $hostport = $post['hostport'];
+    $cover      = $post['cover'] == 1 ? true : false;
+    $database   = $post['database'];
+    $hostname   = $post['hostname'];
+    $hostport   = $post['hostport'];
     $dbUsername = $post['db_username'];
     $dbPassword = $post['db_password'];
-    $prefix = $post['prefix'];
-    $adminUrl = $post['admin_url'];
-    $username = $post['username'];
-    $password = $post['password'];
+    $prefix     = $post['prefix'];
+    $adminUrl   = $post['admin_url'];
+    $username   = $post['username'];
+    $password   = $post['password'];
 
     // 参数验证
     $validateError = null;
@@ -68,7 +68,7 @@ if (isAjax()) {
     $check = preg_match('/[0-9a-zA-Z]+$/', $adminUrl, $matches);
     if (!$check) {
         $validateError = '后台地址不能含有特殊字符, 只能包含字母或数字。';
-        $data = [
+        $data          = [
             'code' => 0,
             'msg'  => $validateError,
         ];
@@ -144,7 +144,6 @@ if (isAjax()) {
     die(json_encode($data));
 }
 
-
 function isAjax()
 {
     if (isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
@@ -163,7 +162,7 @@ function isPost()
 function checkPhpVersion($version)
 {
     $php_version = explode('-', phpversion());
-    $check = strnatcasecmp($php_version[0], $version) >= 0 ? true : false;
+    $check       = strnatcasecmp($php_version[0], $version) >= 0 ? true : false;
     return $check;
 }
 
@@ -200,7 +199,7 @@ function createDatabase($database)
 function parseSql($sql = '', $to, $from)
 {
     list($pure_sql, $comment) = [[], false];
-    $sql = explode("\n", trim(str_replace(["\r\n", "\r"], "\n", $sql)));
+    $sql                      = explode("\n", trim(str_replace(["\r\n", "\r"], "\n", $sql)));
     foreach ($sql as $key => $line) {
         if ($line == '') {
             continue;
@@ -231,14 +230,14 @@ function parseSql($sql = '', $to, $from)
         array_push($pure_sql, $line);
     }
     //$pure_sql = implode($pure_sql, "\n");
-    $pure_sql = implode("\n",$pure_sql);
+    $pure_sql = implode("\n", $pure_sql);
     $pure_sql = explode(";\n", $pure_sql);
     return $pure_sql;
 }
 
 function install($username, $password, $config, $adminUrl)
 {
-    $sqlPath = file_get_contents(INSTALL_PATH . 'sql' . DS . 'install.sql');
+    $sqlPath  = file_get_contents(INSTALL_PATH . 'sql' . DS . 'install.sql');
     $sqlArray = parseSql($sqlPath, $config['prefix'], 'm_');
     Db::startTrans();
     try {
@@ -306,10 +305,10 @@ return [
     'default_timezone' => 'Asia/Shanghai',
     // 应用映射（自动多应用模式有效）
     'app_map'          => [
-        Env::get('easyadmin.admin', '{$admin}') => 'admin',
+        Env::get('mangoadmin.admin', '{$admin}') => 'admin',
     ],
     // 后台别名
-    'admin_alias_name' => Env::get('easyadmin.admin', '{$admin}'),
+    'admin_alias_name' => Env::get('mangoadmin.admin', '{$admin}'),
     // 域名绑定（自动多应用模式有效）
     'domain_bind'      => [],
     // 禁止URL访问的应用列表（自动多应用模式有效）
@@ -325,7 +324,7 @@ return [
     // 显示错误信息
     'show_error_msg'   => false,
     // 静态资源上传到OSS前缀
-    'oss_static_prefix'   => Env::get('easyadmin.oss_static_prefix', 'static_easyadmin'),
+    'oss_static_prefix'   => Env::get('mangoadmin.oss_static_prefix', 'static_mangoadmin'),
 ];
 
 EOT;
@@ -408,7 +407,7 @@ EOT;
 <html>
 <head>
     <meta charset="utf-8">
-    <title>安装EasyAdmin后台程序</title>
+    <title>安装MangoAdmin后台程序</title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -417,24 +416,24 @@ EOT;
 </head>
 <body>
 <h1><img src="static/common/images/logo-1.png"></h1>
-<h2>安装EasyAdmin后台系统</h2>
+<h2>安装MangoAdmin后台系统</h2>
 <div class="content">
     <p class="desc">
         使用过程中遇到任何问题可参考
-        <a href="http://easyadmin.99php.cn/docs" target="_blank">文档教程</a>
-        <a href="https://jq.qq.com/?_wv=1027&k=5IHJawE">QQ交流群</a>
+        <a href="http://doc.ruanzubao.com" target="_blank">文档教程</a>
+        <a href="https://jq.qq.com/?_wv=1027&k=ESYrcUJ2">QQ交流群</a>
     </p>
     <form class="layui-form layui-form-pane" action="">
         <?php if ($errorInfo): ?>
             <div class="error">
                 <?php echo $errorInfo; ?>
             </div>
-        <?php endif; ?>
+        <?php endif;?>
         <div class="bg">
             <div class="layui-form-item">
                 <label class="layui-form-label">数据库地址</label>
                 <div class="layui-input-block">
-                    <input class="layui-input" name="hostname" autocomplete="off" lay-verify="required" lay-reqtext="请输入数据库地址" placeholder="请输入数据库地址" value="host.docker.internal">
+                    <input class="layui-input" name="hostname" autocomplete="off" lay-verify="required" lay-reqtext="请输入数据库地址" placeholder="请输入数据库地址" value="127.0.0.1">
                 </div>
             </div>
 
@@ -448,7 +447,7 @@ EOT;
             <div class="layui-form-item">
                 <label class="layui-form-label">数据库名称</label>
                 <div class="layui-input-block">
-                    <input class="layui-input" name="database" autocomplete="off" lay-verify="required" lay-reqtext="请输入数据库名称" placeholder="请输入数据库名称" value="easyadmin">
+                    <input class="layui-input" name="database" autocomplete="off" lay-verify="required" lay-reqtext="请输入数据库名称" placeholder="请输入数据库名称" value="mangoadmin">
                 </div>
             </div>
 
