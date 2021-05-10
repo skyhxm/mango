@@ -95,6 +95,10 @@ class ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093
         array (
             'jianyan\\excel\\' => 14,
         ),
+        'h' => 
+        array (
+            'hg\\apidoc\\' => 10,
+        ),
         'c' => 
         array (
             'clagiordano\\weblibs\\configmanager\\' => 34,
@@ -109,6 +113,7 @@ class ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093
             'Symfony\\Polyfill\\Php72\\' => 23,
             'Symfony\\Polyfill\\Mbstring\\' => 26,
             'Symfony\\Component\\VarDumper\\' => 28,
+            'Symfony\\Component\\ClassLoader\\' => 30,
             'Stringy\\' => 8,
             'ServiceSwoole\\' => 14,
         ),
@@ -196,6 +201,10 @@ class ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093
         array (
             0 => __DIR__ . '/..' . '/jianyan74/php-excel/src',
         ),
+        'hg\\apidoc\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/hg/apidoc/src',
+        ),
         'clagiordano\\weblibs\\configmanager\\' => 
         array (
             0 => __DIR__ . '/..' . '/clagiordano/weblibs-configmanager/src',
@@ -219,6 +228,10 @@ class ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093
         'Symfony\\Component\\VarDumper\\' => 
         array (
             0 => __DIR__ . '/..' . '/symfony/var-dumper',
+        ),
+        'Symfony\\Component\\ClassLoader\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/class-loader',
         ),
         'Stringy\\' => 
         array (
@@ -340,6 +353,10 @@ class ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093
         0 => __DIR__ . '/../..' . '/extend',
     );
 
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
@@ -347,6 +364,7 @@ class ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093
             $loader->prefixDirsPsr4 = ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093::$prefixDirsPsr4;
             $loader->prefixesPsr0 = ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093::$prefixesPsr0;
             $loader->fallbackDirsPsr0 = ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093::$fallbackDirsPsr0;
+            $loader->classMap = ComposerStaticInit6bad1cb7ba829cb65a670b5323a9e093::$classMap;
 
         }, null, ClassLoader::class);
     }

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "82b3b6bf04f6821eaffbfc004c6f4930",
+    "content-hash": "dd73ec65891c51741549e52b8acb4342",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -783,6 +783,73 @@
                 "url"
             ],
             "time": "2019-07-01T23:21:34+00:00"
+        },
+        {
+            "name": "hg/apidoc",
+            "version": "v2.5.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/HGthecode/thinkphp-apidoc.git",
+                "reference": "c36c77081a17586cc9ff873afd34dc6d78409dea"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/HGthecode/thinkphp-apidoc/zipball/c36c77081a17586cc9ff873afd34dc6d78409dea",
+                "reference": "c36c77081a17586cc9ff873afd34dc6d78409dea",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "doctrine/annotations": "^1.6",
+                "symfony/class-loader": "~3.2.0"
+            },
+            "type": "think-extend",
+            "extra": {
+                "think": {
+                    "services": [
+                        "hg\\apidoc\\Service"
+                    ],
+                    "config": {
+                        "apidoc": "src/config.php"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "hg\\apidoc\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "hg-code",
+                    "email": "376401263@qq.com"
+                }
+            ],
+            "description": "thinkphp API文档自动生成",
+            "keywords": [
+                "apidoc",
+                "api文档",
+                "php接口文档",
+                "swagger",
+                "thinkphp",
+                "接口文档",
+                "注释生成",
+                "自动生成"
+            ],
+            "support": {
+                "issues": "https://github.com/HGthecode/thinkphp-apidoc/issues",
+                "source": "https://github.com/HGthecode/thinkphp-apidoc/tree/v2.5.2"
+            },
+            "time": "2021-05-04T05:02:36+00:00"
         },
         {
             "name": "jianyan74/php-excel",
@@ -1807,6 +1874,71 @@
             "time": "2019-03-08T08:55:37+00:00"
         },
         {
+            "name": "symfony/class-loader",
+            "version": "v3.2.14",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/class-loader.git",
+                "reference": "e192d96b15fdd168bdb1c91001d26c93ba4af482"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/class-loader/zipball/e192d96b15fdd168bdb1c91001d26c93ba4af482",
+                "reference": "e192d96b15fdd168bdb1c91001d26c93ba4af482",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=5.5.9"
+            },
+            "require-dev": {
+                "symfony/finder": "~2.8|~3.0",
+                "symfony/polyfill-apcu": "~1.1"
+            },
+            "suggest": {
+                "symfony/polyfill-apcu": "For using ApcClassLoader on HHVM"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.2-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\ClassLoader\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony ClassLoader Component",
+            "homepage": "https://symfony.com",
+            "support": {
+                "source": "https://github.com/symfony/class-loader/tree/3.2"
+            },
+            "time": "2017-06-01T21:00:24+00:00"
+        },
+        {
             "name": "symfony/polyfill-mbstring",
             "version": "v1.16.0",
             "source": {
@@ -2487,5 +2619,5 @@
         "php": ">=7.1.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "1.1.0"
+    "plugin-api-version": "2.0.0"
 }

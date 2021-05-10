@@ -1,0 +1,42 @@
+{
+    "name": "hg/apidoc",
+    "description": "thinkphp API文档自动生成",
+    "type": "think-extend",
+    "keywords": [
+        "thinkphp",
+        "swagger",
+        "apidoc",
+        "api文档",
+        "接口文档",
+        "自动生成",
+        "注释生成",
+        "php接口文档"
+      ],
+    "require": {
+        "doctrine/annotations": "^1.6",
+        "symfony/class-loader": "~3.2.0"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "hg-code",
+            "email": "376401263@qq.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "hg\\apidoc\\": "src/"
+        }
+    },
+    "extra": {
+        "think": {
+            "services": [
+                "hg\\apidoc\\Service"
+            ],
+            "config": {
+                "apidoc": "src/config.php"
+            }
+        }
+    },
+    "minimum-stability": "beta"
+}
