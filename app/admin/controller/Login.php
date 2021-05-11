@@ -79,7 +79,7 @@ class Login extends AdminController
         //判断插件
         $list      = ThinkAddons::localAddons();
         $found_key = array_search('login_page', array_column($list, 'name'));
-        if ($found_key) {
+        if (is_numeric($found_key)) {
             $page_id = LoginPage::where('status', 1)->order('id', 'desc')->value('id');
             if (!$page_id) {
                 $page_id = 1;
