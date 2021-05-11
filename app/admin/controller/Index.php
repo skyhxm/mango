@@ -18,7 +18,6 @@ class Index extends AdminController
      */
     public function index()
     {
-        echo "string";die;
         return $this->fetch('', [
             'admin' => session('admin'),
         ]);
