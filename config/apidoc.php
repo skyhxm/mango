@@ -7,12 +7,12 @@ return [
     // 版权申明
     'copyright'          => 'Powered By hg-code',
     // 默认作者
-    'default_author'=>'',
+    'default_author'     => '',
     // 默认请求类型
-    'default_method'=>'GET',
+    'default_method'     => 'GET',
     // 设置应用/版本（必须设置）
-    'apps'           => [
-        ['title'=>'v1.0','path'=>'app\controller','folder'=>'v1'],
+    'apps'               => [
+        ['title' => 'v1.0', 'path' => 'app\controller', 'folder' => 'v1'],
     ],
     // 控制器分组
     'groups'             => [],
@@ -27,36 +27,36 @@ return [
         // 是否开启缓存
         'enable' => false,
         // 缓存文件路径
-        'path'   =>  '../runtime/apidoc/',
+        'path'   => '../runtime/apidoc/',
         // 是否显示更新缓存按钮
         'reload' => true,
         // 最大缓存文件数
-        'max'    => 5,  //最大缓存数量
+        'max'    => 5, //最大缓存数量
     ],
     // 权限认证配置
     'auth'               => [
         // 是否启用密码验证
-        'enable'     => false,
+        'enable'     => true,
         // 验证密码
         'password'   => "123456",
         // 密码加密盐
         'secret_key' => "apidoc#hg_code",
     ],
     // 统一的请求Header
-    'headers'=>[],
+    'headers'            => [],
     // 统一的请求参数Parameters
-    'parameters'=>[],
+    'parameters'         => [],
     // 统一的请求响应体，仅显示在文档提示中
-    'responses'=>[
-        ['name'=>'code','desc'=>'状态码','type'=>'int'],
-        ['name'=>'message','desc'=>'操作描述','type'=>'string'],
-        ['name'=>'data','desc'=>'业务数据','main'=>true,'type'=>'object'],
+    'responses'          => [
+        ['name' => 'code', 'desc' => '状态码', 'type' => 'int'],
+        ['name' => 'message', 'desc' => '操作描述', 'type' => 'string'],
+        ['name' => 'data', 'desc' => '业务数据', 'main' => true, 'type' => 'object'],
     ],
     // md文档
-    'docs'              => [
+    'docs'               => [
         'menu_title' => '开发文档',
-        'menus'      => []
+        'menus'      => [],
     ],
-    'crud'=>[]
+    'crud'               => [],
 
 ];

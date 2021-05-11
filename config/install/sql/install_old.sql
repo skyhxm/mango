@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 80016
 File Encoding         : 65001
 
-Date: 2021-03-17 22:13:40
+Date: 2021-03-30 20:50:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -69,7 +69,7 @@ CREATE TABLE `m_mall_goods` (
 -- Records of m_mall_goods
 -- ----------------------------
 INSERT INTO `m_mall_goods` VALUES ('8', '10', '落地-风扇', 'http://admin.host/upload/20200514/a0f7fe9637abd219f7e93ceb2820df9b.jpg', 'http://admin.host/upload/20200514/95496713918290f6315ea3f87efa6bf2.jpg|http://admin.host/upload/20200514/ae29fa9cba4fc02defb7daed41cb2b13.jpg|http://admin.host/upload/20200514/f0a104d88ec7dc6fb42d2f87cbc71b76.jpg|http://admin.host/upload/20200514/3b88be4b1934690e5c1bd6b54b9ab5c8.jpg', '<p>76654757</p>\n\n<p><img alt=\"\" src=\"http://admin.host/upload/20200515/198070421110fa01f2c2ac2f52481647.jpg\" style=\"height:689px; width:790px\" /></p>\n\n<p><img alt=\"\" src=\"http://admin.host/upload/20200515/a07a742c15a78781e79f8a3317006c1d.jpg\" style=\"height:877px; width:790px\" /></p>\n', '599.00', '368.00', '0', '594', '0', '0', '675', '1', '', '1589454309', '1589567016', null);
-INSERT INTO `m_mall_goods` VALUES ('9', '9', '电脑', 'http://admin.host/upload/20200514/bbf858d469dec2e12a89460110068d3d.jpg', 'http://admin.host/upload/20200514/f0a104d88ec7dc6fb42d2f87cbc71b76.jpg', '<p>477</p>\n', '0.00', '0.00', '0', '0', '115', '320', '0', '1', '', '1589465215', '1589476345', null);
+INSERT INTO `m_mall_goods` VALUES ('9', '9', '电脑', 'http://admin.host/upload/20200514/bbf858d469dec2e12a89460110068d3d.jpg', 'http://admin.host/upload/20200514/f0a104d88ec7dc6fb42d2f87cbc71b76.jpg', '<p>477</p>\n', '0.00', '0.00', '0', '0', '115', '320', '0', '1', '', '1589465215', '1617092988', null);
 
 -- ----------------------------
 -- Table structure for m_plugin
@@ -121,7 +121,7 @@ CREATE TABLE `m_system_admin` (
 -- ----------------------------
 -- Records of m_system_admin
 -- ----------------------------
-INSERT INTO `m_system_admin` VALUES ('1', null, '/static/admin/images/head.jpg', 'admin', 'ed696eb5bba1f7460585cc6975e6cf9bf24903dd', null, '', '6', '0', '1', '1615542339', '1615990241', null);
+INSERT INTO `m_system_admin` VALUES ('1', null, '/static/admin/images/head.jpg', 'admin', 'ed696eb5bba1f7460585cc6975e6cf9bf24903dd', null, '', '9', '0', '1', '1615542339', '1617089693', null);
 
 -- ----------------------------
 -- Table structure for m_system_auth
@@ -138,13 +138,14 @@ CREATE TABLE `m_system_auth` (
   `delete_time` int(11) DEFAULT NULL COMMENT '删除时间',
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统权限表';
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统权限表';
 
 -- ----------------------------
 -- Records of m_system_auth
 -- ----------------------------
 INSERT INTO `m_system_auth` VALUES ('1', '管理员', '1', '1', '测试管理员', '1588921753', '1589614331', null);
 INSERT INTO `m_system_auth` VALUES ('6', '游客权限', '0', '1', '', '1588227513', '1589591751', '1589591751');
+INSERT INTO `m_system_auth` VALUES ('7', '活动管理', '0', '1', 'afd ', '1617091776', '1617091793', '1617091793');
 
 -- ----------------------------
 -- Table structure for m_system_auth_node
@@ -248,7 +249,7 @@ CREATE TABLE `m_system_log_202103` (
   `useragent` varchar(255) DEFAULT '' COMMENT 'User-Agent',
   `create_time` int(10) DEFAULT NULL COMMENT '操作时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=655 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='后台操作日志表 - 202103';
+) ENGINE=InnoDB AUTO_INCREMENT=662 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='后台操作日志表 - 202103';
 
 -- ----------------------------
 -- Records of m_system_log_202103
@@ -278,6 +279,13 @@ INSERT INTO `m_system_log_202103` VALUES ('651', '1', '/admin/system.uploadfile/
 INSERT INTO `m_system_log_202103` VALUES ('652', '1', '/admin/system.uploadfile/delete?id=286', 'post', '', '{\"id\":\"286\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36', '1615726641');
 INSERT INTO `m_system_log_202103` VALUES ('653', null, '/admin/login/index.html', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"mpuw\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36', '1615860338');
 INSERT INTO `m_system_log_202103` VALUES ('654', null, '/admin/login/index.html', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"klft\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1615990241');
+INSERT INTO `m_system_log_202103` VALUES ('655', null, '/admin/login/index.html', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"cmwf\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1617012901');
+INSERT INTO `m_system_log_202103` VALUES ('656', null, '/admin/login/index.html', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"iy3f\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1617088357');
+INSERT INTO `m_system_log_202103` VALUES ('657', null, '/admin/login/index.html', 'post', '', '{\"username\":\"admin\",\"password\":\"ed696eb5bba1f7460585cc6975e6cf9bf24903dd\",\"captcha\":\"3fsa\",\"keep_login\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1617089693');
+INSERT INTO `m_system_log_202103` VALUES ('658', '1', '/admin/system.auth/add', 'post', '', '{\"title\":\"活动管理\",\"remark\":\"afd \"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1617091776');
+INSERT INTO `m_system_log_202103` VALUES ('659', '1', '/admin/system.auth/delete?id=7', 'post', '', '{\"id\":\"7\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1617091793');
+INSERT INTO `m_system_log_202103` VALUES ('660', '1', '/admin/mall.goods/modify', 'post', '', '{\"id\":\"9\",\"field\":\"status\",\"value\":\"0\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1617092981');
+INSERT INTO `m_system_log_202103` VALUES ('661', '1', '/admin/mall.goods/modify', 'post', '', '{\"id\":\"9\",\"field\":\"status\",\"value\":\"1\"}', '127.0.0.1', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4442.4 Safari/537.36', '1617092988');
 
 -- ----------------------------
 -- Table structure for m_system_menu
@@ -301,7 +309,7 @@ CREATE TABLE `m_system_menu` (
   PRIMARY KEY (`id`),
   KEY `title` (`title`),
   KEY `href` (`href`)
-) ENGINE=InnoDB AUTO_INCREMENT=299 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=307 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='系统菜单表';
 
 -- ----------------------------
 -- Records of m_system_menu
@@ -320,10 +328,10 @@ INSERT INTO `m_system_menu` VALUES ('251', '249', '商品管理', 'fa fa-list', 
 INSERT INTO `m_system_menu` VALUES ('252', '228', '快捷入口', 'fa fa-list', 'system.quick/index', '', '_self', '0', '1', '', '', '1589623683', '1589623683', null);
 INSERT INTO `m_system_menu` VALUES ('253', '228', '日志管理', 'fa fa-connectdevelop', 'system.log/index', '', '_self', '0', '1', '', '', '1589623684', '1589623684', null);
 INSERT INTO `m_system_menu` VALUES ('254', '228', '插件管理', 'fa fa-android', 'system.plugin/index', '', '_self', '0', '1', '插件管理模块', '', '1615677684', '1615677927', null);
-INSERT INTO `m_system_menu` VALUES ('295', '0', '测试插件菜单', '&#xe66f;', 'test', '', '_self', '0', '1', null, '', '1615714909', '1615714909', null);
-INSERT INTO `m_system_menu` VALUES ('296', '295', '查看', '', 'addons/test/index/index', '', '_self', '0', '1', null, '', '1615714909', '1615714909', null);
-INSERT INTO `m_system_menu` VALUES ('297', '295', '添加', '', 'addons/test/index/add', '', '_self', '0', '1', null, '', '1615714909', '1615714909', null);
-INSERT INTO `m_system_menu` VALUES ('298', '295', '详情', '', 'addons/test/index/detail', '', '_self', '0', '1', null, '', '1615714909', '1615714909', null);
+INSERT INTO `m_system_menu` VALUES ('303', '0', '测试插件菜单', '&#xe66f;', 'test', '', '_self', '0', '1', null, '', '1617108412', '1617108412', null);
+INSERT INTO `m_system_menu` VALUES ('304', '303', '查看', '', '/addons/test/index/index', '', '_self', '0', '1', null, '', '1617108412', '1617108412', null);
+INSERT INTO `m_system_menu` VALUES ('305', '303', '添加', '', '/addons/test/index/add', '', '_self', '0', '1', null, '', '1617108412', '1617108412', null);
+INSERT INTO `m_system_menu` VALUES ('306', '303', '详情', '', '/addons/test/index/detail', '', '_self', '0', '1', null, '', '1617108412', '1617108412', null);
 
 -- ----------------------------
 -- Table structure for m_system_node
