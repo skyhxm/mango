@@ -14,9 +14,12 @@ namespace Symfony\Component\VarDumper\Caster;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\VarDumper\Cloner\Stub;
 
+/**
+ * @final since Symfony 4.4
+ */
 class SymfonyCaster
 {
-    private static $requestGetters = [
+    private const REQUEST_GETTERS = [
         'pathInfo' => 'getPathInfo',
         'requestUri' => 'getRequestUri',
         'baseUrl' => 'getBaseUrl',
@@ -29,7 +32,7 @@ class SymfonyCaster
     {
         $clone = null;
 
-        foreach (self::$requestGetters as $prop => $getter) {
+        foreach (self::REQUEST_GETTERS as $prop => $getter) {
             $key = Caster::PREFIX_PROTECTED.$prop;
             if (\array_key_exists($key, $a) && null === $a[$key]) {
                 if (null === $clone) {
@@ -47,6 +50,18 @@ class SymfonyCaster
         $multiKey = sprintf("\0%s\0multi", \get_class($client));
         if (isset($a[$multiKey])) {
             $a[$multiKey] = new CutStub($a[$multiKey]);
+        }
+
+        return $a;
+    }
+
+    public static function castHttpClientResponse($response, array $a, Stub $stub, $isNested)
+    {
+        $stub->cut += \count($a);
+        $a = [];
+
+        foreach ($response->getInfo() as $k => $v) {
+            $a[Caster::PREFIX_VIRTUAL.$k] = $v;
         }
 
         return $a;

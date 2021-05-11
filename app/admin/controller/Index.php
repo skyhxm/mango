@@ -2,7 +2,6 @@
 
 namespace app\admin\controller;
 
-
 use app\admin\model\SystemAdmin;
 use app\admin\model\SystemQuick;
 use app\common\controller\AdminController;
@@ -19,6 +18,7 @@ class Index extends AdminController
      */
     public function index()
     {
+        echo "string";die;
         return $this->fetch('', [
             'admin' => session('admin'),
         ]);
@@ -49,7 +49,7 @@ class Index extends AdminController
      */
     public function editAdmin()
     {
-        $id = session('admin.id');
+        $id  = session('admin.id');
         $row = (new SystemAdmin())
             ->withoutField('password')
             ->find($id);
@@ -81,7 +81,7 @@ class Index extends AdminController
      */
     public function editPassword()
     {
-        $id = session('admin.id');
+        $id  = session('admin.id');
         $row = (new SystemAdmin())
             ->withoutField('password')
             ->find($id);

@@ -107,6 +107,11 @@ class Service {
                             'type' => 'string',
                             'location' => 'query',
                             'sentAs' => 'uploadId',
+                        ),
+                        'PicOperations' => array(
+                            'type' => 'string',
+                            'location' => 'header',
+                            'sentAs' => 'Pic-Operations',
                         )
                     )
                 ),
@@ -196,14 +201,6 @@ class Service {
                                 'Qcloud\\Cos\\Client::explodeKey'
                             )
                         ),
-                        'Metadata' => array(
-                            'type' => 'object',
-                            'location' => 'header',
-                            'sentAs' => 'x-cos-meta-',
-                            'additionalProperties' => array(
-                                'type' => 'string',
-                            ),
-                        ),
                         'ServerSideEncryption' => array(
                             'type' => 'string',
                             'location' => 'header',
@@ -247,6 +244,11 @@ class Service {
                         'ACP' => array(
                             'type' => 'object',
                             'additionalProperties' => true,
+                        ),
+                        'PicOperations' => array(
+                            'type' => 'string',
+                            'location' => 'header',
+                            'sentAs' => 'Pic-Operations',
                         )
                     )
                 ),
@@ -370,14 +372,6 @@ class Service {
                             'minLength' => 1,
                             'filters' => array(
                                 'Qcloud\\Cos\\Client::explodeKey')
-                        ),
-                        'Metadata' => array(
-                            'type' => 'object',
-                            'location' => 'header',
-                            'sentAs' => 'x-cos-meta-',
-                            'additionalProperties' => array(
-                                'type' => 'string',
-                            ),
                         ),
                         'MetadataDirective' => array(
                             'type' => 'string',
@@ -753,6 +747,11 @@ class Service {
                             'location' => 'header',
                             'sentAs' => 'x-cos-server-side-encryption-customer-key-MD5',
                         ),
+                        'TrafficLimit' => array(
+                            'type' => 'integer',
+                            'location' => 'header',
+                            'sentAs' => 'x-cos-traffic-limit',
+                        )
                     )
                 ),
                 // 获取 COS 对象的访问权限信息（Access Control List, ACL）的方法.
@@ -824,6 +823,21 @@ class Service {
                     'uri' => '/{Bucket}?domain',
                     'class' => 'Qcloud\\Cos\\Command',
                     'responseClass' => 'GetBucketDomainOutput',
+                    'responseType' => 'model',
+                    'parameters' => array(
+                        'Bucket' => array(
+                            'required' => true,
+                            'type' => 'string',
+                            'location' => 'uri',
+                        )
+                    ),
+                ),
+                // 查询存储桶（Bucket) Accelerate配置信息的方法.
+                'GetBucketAccelerate' => array(
+                    'httpMethod' => 'GET',
+                    'uri' => '/{Bucket}?accelerate',
+                    'class' => 'Qcloud\\Cos\\Command',
+                    'responseClass' => 'GetBucketAccelerateOutput',
                     'responseType' => 'model',
                     'parameters' => array(
                         'Bucket' => array(
@@ -1054,6 +1068,11 @@ class Service {
                             'type' => 'string',
                             'location' => 'header',
                             'sentAs' => 'x-cos-request-payer',
+                        ),
+                        'TrafficLimit' => array(
+                            'type' => 'integer',
+                            'location' => 'header',
+                            'sentAs' => 'x-cos-traffic-limit',
                         )
                     )
                 ),
@@ -1135,14 +1154,6 @@ class Service {
                                 'Qcloud\\Cos\\Client::explodeKey'
                             )
                         ),
-                        'Metadata' => array(
-                            'type' => 'object',
-                            'location' => 'header',
-                            'sentAs' => 'x-cos-meta-',
-                            'additionalProperties' => array(
-                                'type' => 'string'
-                            )
-                        ),
                         'ServerSideEncryption' => array(
                             'type' => 'string',
                             'location' => 'header',
@@ -1191,6 +1202,11 @@ class Service {
                             'type' => 'string',
                             'location' => 'header',
                             'sentAs' => 'Pic-Operations',
+                        ),
+                        'TrafficLimit' => array(
+                            'type' => 'integer',
+                            'location' => 'header',
+                            'sentAs' => 'x-cos-traffic-limit',
                         )
                     )
                 ),
@@ -1703,6 +1719,37 @@ class Service {
                             'sentAs' => 'MfaDelete',
                         ),
                         'Status' => array(
+                            'type' => 'string',
+                            'location' => 'xml',
+                        ),
+                    ),
+                ),
+                // 配置存储桶（Bucket) Accelerate的方法.
+                'PutBucketAccelerate' => array(
+                    'httpMethod' => 'PUT',
+                    'uri' => '/{Bucket}?accelerate',
+                    'class' => 'Qcloud\\Cos\\Command',
+                    'responseClass' => 'PutBucketAccelerateOutput',
+                    'responseType' => 'model',
+                    'data' => array(
+                        'xmlRoot' => array(
+                            'name' => 'AccelerateConfiguration',
+                        ),
+                        'xmlAllowEmpty' => true,
+                    ),
+                    'parameters' => array(
+                        'Bucket' => array(
+                            'required' => true,
+                            'type' => 'string',
+                            'location' => 'uri',
+                        ),
+                        'Status' => array(
+                            'required' => true,
+                            'type' => 'string',
+                            'location' => 'xml',
+                        ),
+                        'Type' => array(
+                            'required' => true,
                             'type' => 'string',
                             'location' => 'xml',
                         ),
@@ -2593,7 +2640,206 @@ class Service {
                             'sentAs' => 'x-cos-request-payer',
                         )
                     ),
-                )
+                ),
+                'SelectObjectContent' => array(
+                    'httpMethod' => 'Post',
+                    'uri' => '/{/Key*}?select&select-type=2',
+                    'class' => 'Qcloud\\Cos\\Command',
+                    'responseClass' => 'SelectObjectContentOutput',
+                    'responseType' => 'model',
+                    'data' => array(
+                        'xmlRoot' => array(
+                            'name' => 'SelectRequest',
+                        ),
+                        'contentMd5' => true,
+                    ),
+                    'parameters' => array(
+                        'Bucket' => array(
+                            'required' => true,
+                            'type' => 'string',
+                            'location' => 'uri',
+                        ),
+                        'Key' => array(
+                            'required' => true,
+                            'type' => 'string',
+                            'location' => 'uri',
+                            'minLength' => 1,
+                            'filters' => array(
+                                'Qcloud\\Cos\\Client::explodeKey')
+                        ),
+                        'Expression' => array(
+                            'type' => 'string',
+                            'location' => 'xml'
+                        ),
+                        'ExpressionType' => array(
+                            'type' => 'string',
+                            'location' => 'xml'
+                        ),
+                        'InputSerialization' => array(
+                            'location' => 'xml',
+                            'type' => 'object',
+                            'properties' => array(
+                                'CompressionType' => array(
+                                    'type' => 'string',
+                                    'location' => 'xml',
+                                ),
+                                'CSV' => array(
+                                    'type' => 'object',
+                                    'location' => 'xml',
+                                    'properties' => array(
+                                        'FileHeaderInfo' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'RecordDelimiter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'FieldDelimiter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'QuoteCharacter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'QuoteEscapeCharacter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'Comments' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'AllowQuotedRecordDelimiter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                    )
+                                ),
+                                'JSON' => array(
+                                    'type' => 'string',
+                                    'location' => 'object',
+                                    'properties' => array(
+                                        'Type' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        )
+                                    )
+                                ),
+                            )
+                        ),
+                        'OutputSerialization' => array(
+                            'location' => 'xml',
+                            'type' => 'object',
+                            'properties' => array(
+                                'CompressionType' => array(
+                                    'type' => 'string',
+                                    'location' => 'xml',
+                                ),
+                                'CSV' => array(
+                                    'type' => 'object',
+                                    'location' => 'xml',
+                                    'properties' => array(
+                                        'QuoteFields' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'RecordDelimiter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'FieldDelimiter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'QuoteCharacter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                        'QuoteEscapeCharacter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        ),
+                                    )
+                                ),
+                                'JSON' => array(
+                                    'type' => 'string',
+                                    'location' => 'object',
+                                    'properties' => array(
+                                        'RecordDelimiter' => array(
+                                            'type' => 'string',
+                                            'location' => 'xml',
+                                        )
+                                    )
+                                ),
+                            )
+                        ),
+                        'RequestProgress' => array(
+                            'location' => 'xml',
+                            'type' => 'object',
+                            'properties' => array(
+                                'Enabled' => array(
+                                    'type' => 'string',
+                                    'location' => 'xml',
+                                ),
+                            )
+                        ),
+                    ),
+                ),
+                // 存储桶（Bucket）开启智能分层
+                'PutBucketIntelligentTiering' => array(
+                    'httpMethod' => 'PUT',
+                    'uri' => '/{Bucket}?intelligenttiering',
+                    'class' => 'Qcloud\\Cos\\Command',
+                    'responseClass' => 'PutBucketIntelligentTieringOutput',
+                    'responseType' => 'model',
+                    'data' => array(
+                        'xmlRoot' => array(
+                            'name' => 'IntelligentTieringConfiguration',
+                        ),
+                    ),
+                    'parameters' => array(
+                        'Bucket' => array(
+                            'required' => true,
+                            'type' => 'string',
+                            'location' => 'uri',
+                        ),
+                        'Status' => array(
+                            'type' => 'string',
+                            'location' => 'xml',
+                        ),
+                        'Transition' => array(
+                            'location' => 'xml',
+                            'type' => 'object',
+                            'properties' => array(
+                                'Days' => array(
+                                    'type' => 'integer',
+                                    'location' => 'xml',
+                                ),
+                                'RequestFrequent' => array(
+                                    'type' => 'integer',
+                                    'location' => 'xml',
+                                ),
+                            )
+                        ),
+                    ),
+                ),
+                // 查询存储桶（Bucket）智能分层
+                'GetBucketIntelligentTiering' => array(
+                    'httpMethod' => 'GET',
+                    'uri' => '/{Bucket}?intelligenttiering',
+                    'class' => 'Qcloud\\Cos\\Command',
+                    'responseClass' => 'GetBucketIntelligentTieringOutput',
+                    'responseType' => 'model',
+                    'parameters' => array(
+                        'Bucket' => array(
+                            'required' => true,
+                            'type' => 'string',
+                            'location' => 'uri',
+                        ),
+                    ),
+                ),
             ),
             'models' => array(
                 'AbortMultipartUploadOutput' => array(
@@ -3025,14 +3271,6 @@ class Service {
                             'location' => 'header',
                             'sentAs' => 'x-cos-server-side-encryption',
                         ),
-                        'Metadata' => array(
-                            'type' => 'object',
-                            'location' => 'header',
-                            'sentAs' => 'x-cos-meta-',
-                            'additionalProperties' => array(
-                                'type' => 'string',
-                            ),
-                        ),
                         'SSECustomerAlgorithm' => array(
                             'type' => 'string',
                             'location' => 'header',
@@ -3245,13 +3483,17 @@ class Service {
                                 'type' => 'object',
                                 'properties' => array(
                                     'Status' => array(
-                                        'type' => 'string'),
+                                        'type' => 'string'
+                                    ),
                                     'Name' => array(
-                                        'type' => 'string'),
+                                        'type' => 'string'
+                                    ),
                                     'Type' => array(
-                                        'type' => 'string'),
+                                        'type' => 'string'
+                                    ),
                                     'ForcedReplacement' => array(
-                                        'type' => 'string'),
+                                        'type' => 'string'
+                                    ),
                                 ),
                             ),
                         ),
@@ -3435,6 +3677,24 @@ class Service {
                                 'strip_tags',
                                 'trim',
                             ),
+                        ),
+                    ),
+                ),
+                'GetBucketAccelerateOutput' => array(
+                    'type' => 'object',
+                    'additionalProperties' => true,
+                    'properties' => array(
+                        'Status' => array(
+                            'type' => 'string',
+                            'location' => 'xml',
+                        ),
+                        'Type' => array(
+                            'type' => 'string',
+                            'location' => 'xml',
+                        ),
+                        'RequestId' => array(
+                            'location' => 'header',
+                            'sentAs' => 'x-cos-request-id',
                         ),
                     ),
                 ),
@@ -3945,6 +4205,16 @@ class Service {
                     'additionalProperties' => true,
                     'properties' => array(
                         'RequestId' => array(
+                            'location' => 'header', 
+                            'sentAs' => 'x-cos-request-id',
+                        ),
+                    ),
+                ),
+                'PutBucketAccelerateOutput' => array(
+                    'type' => 'object',
+                    'additionalProperties' => true,
+                    'properties' => array(
+                        'RequestId' => array(
                             'location' => 'header',
                             'sentAs' => 'x-cos-request-id',
                         ),
@@ -4030,7 +4300,7 @@ class Service {
                         'Parts' => array(
                             'type' => 'array',
                             'location' => 'xml',
-                            'sentAs' => 'Parts',
+                            'sentAs' => 'Part',
                             'data' => array(
                                 'xmlFlattened' => true
                             ),
@@ -4241,10 +4511,9 @@ class Service {
                             'type' => 'string',
                             'location' => 'xml',
                         ),
-                        'Versions' => array(
+                        'Version' => array(
                             'type' => 'array',
                             'location' => 'xml',
-                            'sentAs' => 'Versions',
                             'data' => array(
                                 'xmlFlattened' => true,
                             ),
@@ -4475,6 +4744,97 @@ class Service {
                         ),
                     ),
                 ),
+                'ListBucketInventoryConfigurationsOutput' => array(
+                    'type' => 'object',
+                    'additionalProperties' => true,
+                    'properties' => array(
+                        'InventoryConfiguration' => array(
+                            'type' => 'array',
+                            'location' => 'xml',
+                            'sentAs' => 'InventoryConfiguration',
+                            'items' => array(
+                                'type' => 'object',
+                                'properties' => array(
+                                    'Destination' => array(
+                                        'type' => 'object',
+                                        'location' => 'xml',
+                                        'properties' => array(
+                                            'COSBucketDestination' => array(
+                                                'type' => 'object',
+                                                'properties' => array(
+                                                    'Format' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'AccountId' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'Bucket' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'Prefix' => array(
+                                                        'type' => 'string',
+                                                    ),
+                                                    'Encryption' => array(
+                                                        'type' => 'object',
+                                                        'properties' => array(
+                                                            'SSE-COS' => array(
+                                                                'type' => 'string',
+                                                            )
+                                                        )
+                                                    ),
+                                                    
+                                                ),
+                                            ),
+                                        ),
+                                    ),
+                                    'Schedule' => array(
+                                        'type' => 'object',
+                                        'location' => 'xml',
+                                        'properties' => array(
+                                            'Frequency' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
+                                    'OptionalFields' => array(
+                                        'type' => 'array',
+                                        'location' => 'xml',
+                                        'properties' => array(
+                                            'Key' => array(
+                                                'type' => 'string',
+                                            ),
+                                        ),
+                                    ),
+                                    'OptionalFields' => array(
+                                        'type' => 'array',
+                                        'location' => 'xml',
+                                        'items' => array(
+                                            'name' => 'Field',
+                                            'type' => 'string',
+                                            'sentAs' => 'Field',
+                                        ),
+                                    ),
+                                    'IsEnabled' => array(
+                                        'type' => 'string',
+                                        'location' => 'xml',
+                                    ),
+                                    'Id' => array(
+                                        'type' => 'string',
+                                        'location' => 'xml',
+                                    ),
+                                    'IncludedObjectVersions' => array(
+                                        'type' => 'string',
+                                        'location' => 'xml',
+                                    ),
+                                    'RequestId' => array(
+                                        'location' => 'header',
+                                        'sentAs' => 'x-cos-request-id',
+                                    ),
+                                ),
+                            ),
+                        ),
+                    ),
+                ),
                 'HeadObjectOutput' => array(
                     'type' => 'object',
                     'additionalProperties' => true,
@@ -4563,14 +4923,6 @@ class Service {
                             'location' => 'header',
                             'sentAs' => 'x-cos-server-side-encryption',
                         ),
-                        'Metadata' => array(
-                            'type' => 'object',
-                            'location' => 'header',
-                            'sentAs' => 'x-cos-meta-',
-                            'additionalProperties' => array(
-                                'type' => 'string',
-                            ),
-                        ),
                         'SSECustomerAlgorithm' => array(
                             'type' => 'string',
                             'location' => 'header',
@@ -4608,6 +4960,53 @@ class Service {
                     )
                 ),
                 'HeadBucketOutput' => array(
+                    'type' => 'object',
+                    'additionalProperties' => true,
+                    'properties' => array(
+                        'RequestId' => array(
+                            'location' => 'header',
+                            'sentAs' => 'x-cos-request-id',
+                        ),
+                    ),
+                ),
+                'SelectObjectContentOutput' => array(
+                    'type' => 'object',
+                    'additionalProperties' => true,
+                    'properties' => array(
+                        'RawData' => array(
+                            'type' => 'string',
+                            'instanceOf' => 'GuzzleHttp\\Psr7\\Stream',
+                            'location' => 'body',
+                        ),
+                    ),
+                ),
+                'GetBucketIntelligentTieringOutput' => array(
+                    'type' => 'object',
+                    'additionalProperties' => true,
+                    'properties' => array(
+                        'Status' => array(
+                            'type' => 'string',
+                            'location' => 'xml',
+                        ),
+                        'Transition' => array(
+                            'type' => 'object',
+                            'location' => 'xml',
+                            'properties' => array(
+                                'Days' => array(
+                                    'type' => 'string',
+                                ),
+                                'RequestFrequent' => array(
+                                    'type' => 'string',
+                                ),
+                            )
+                        ),
+                        'RequestId' => array(
+                            'location' => 'header',
+                            'sentAs' => 'x-cos-request-id',
+                        ),
+                    ),
+                ),
+                'PutBucketIntelligentTieringOutput' => array(
                     'type' => 'object',
                     'additionalProperties' => true,
                     'properties' => array(

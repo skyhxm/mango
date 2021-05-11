@@ -10,7 +10,7 @@
 // +----------------------------------------------------------------------
 use think\facade\Route;
 
-Route::view('/', 'welcome', [
+Route::view('/', 'index/welcome', [
     'version' => time(),
     'data'    => [
         'description'        => '基于ThinkPHP6.0和Layui的快速开发的后台管理系统',
@@ -26,7 +26,7 @@ Route::view('/', 'welcome', [
         [
             'name'   => '文档',
             'active' => false,
-            'href'   => '',
+            'href'   => 'http://doc.ruanzubao.com',
             'target' => '_blank',
         ],
         [
