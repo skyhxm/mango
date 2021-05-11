@@ -164,7 +164,7 @@
 						})
 					}else{
 
-						if(response.code =='-3' || response.code =='-4'){
+						if(response.code =='401'){
 							//未登录
 							okLayer.redCrossMsg(response.msg, function () {
 								layer.open({
