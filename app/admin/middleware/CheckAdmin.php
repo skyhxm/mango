@@ -5,7 +5,7 @@
 // +----------------------------------------------------------------------
 // | PHP交流群: 763822524
 // +----------------------------------------------------------------------
-// | 开源协议  https://mit-license.org 
+// | 开源协议  https://mit-license.org
 // +----------------------------------------------------------------------
 // | github开源项目：https://github.com/zhongshaofa/EasyAdmin
 // +----------------------------------------------------------------------
@@ -28,11 +28,11 @@ class CheckAdmin
     public function handle(Request $request, \Closure $next)
     {
         $adminConfig = config('admin');
-        $adminId = session('admin.id');
-        $expireTime = session('admin.expire_time');
+        $adminId     = session('admin.id');
+        $expireTime  = session('admin.expire_time');
         /** @var AuthService $authService */
-        $authService = app(AuthService::class, ['adminId' => $adminId]);
-        $currentNode = $authService->getCurrentNode();
+        $authService       = app(AuthService::class, ['adminId' => $adminId]);
+        $currentNode       = $authService->getCurrentNode();
         $currentController = parse_name($request->controller());
 
         // 验证登录
@@ -54,7 +54,7 @@ class CheckAdmin
             !$check && $this->error('无权限访问');
 
             // 判断是否为演示环境
-            if(env('easyadmin.is_demo', false) && $request->isPost()){
+            if (env('mango.is_demo', false) && $request->isPost()) {
                 $this->error('演示环境下不允许修改');
             }
 

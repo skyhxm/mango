@@ -46,7 +46,7 @@ class Login extends AdminController
      */
     public function index()
     {
-        $captcha = Env::get('easyadmin.captcha', 1);
+        $captcha = Env::get('mango.captcha', 1);
         if ($this->request->isPost()) {
             $post = $this->request->post();
             $rule = [

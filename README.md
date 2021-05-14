@@ -26,9 +26,9 @@
  
 ## 代码仓库
 
-* GitHub地址：[https://github.com/huaxinman/mango](https://github.com/huaxinman/mango)
+* GitHub地址：[https://github.com/skyhxm/mango](https://github.com/skyhxm/mango)
 
-* Gitee地址：[https://github.com/huaxinman/mango](https://github.com/huaxinman/mango)
+* Gitee地址：[https://github.com/skyhxm/mango](https://github.com/skyhxm/mango)
 
 
 ## 项目特性
@@ -85,7 +85,7 @@
 
 * Echarts：[https://github.com/apache/incubator-echarts](https://github.com/apache/incubator-echarts)
 
-* Easyadmin[https://github.com/huaxinman/easyadmin](https://github.com/huaxinman/easyadmin)
+* Easyadmin[https://github.com/skyhxm/easyadmin](https://github.com/skyhxm/easyadmin)
   
  ## 捐赠支持
  

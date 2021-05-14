@@ -1,37 +1,43 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="utf-8">
-	<title>插件列表</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="/static/css/oksub.css">
-	<script type="text/javascript" src="/static/lib/loading/okLoading.js"></script>
+    <meta charset="utf-8">
+    <title>插件列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="/static/css/oksub.css">
+    <script type="text/javascript" src="/static/lib/loading/okLoading.js"></script>
 </head>
+
 <body>
-<div class="ok-body">
-	<!--模糊搜索区域-->
-	<!--数据表格-->
-	<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
-		<ul class="layui-tab-title">
-			<li class="layui-this">全部插件</li>
-			<li class="">本地插件</li>
-		</ul>
-
-		<div class="layui-tab-content">
-			<div class="layui-tab-item layui-show">
-				<table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
-			</div>
-
-			<div class="layui-tab-item">
-				<table class="layui-hide" id="tableIdbd" lay-filter="tableFilter"></table>
-			</div>
-		</div>
-	
-	</div>
-<!--js逻辑-->
-<script src="/static/lib/layui/layui.js"></script>
-<script>
-	layui.use(["element", "jquery", "table", "form", "laydate", "okLayer", "okUtils", "okMock"], function () {
+    <div class="ok-body">
+        <!--模糊搜索区域-->
+        <!--数据表格-->
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">全部插件</li>
+                <li class="">本地插件</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-table-tool" style="line-height: 45px;">
+                    <div class="layui-table-tool-temp">
+                        <button class="layui-btn layui-btn-sm layuimini-btn-primary refresh"><i class="fa fa-refresh"></i>
+                        </button>
+                        <button class="layui-btn layui-btn-normal layui-btn-sm get-user" data-open="" data-title="会员信息"><i class="fa fa-user"></i> 会员信息</button>
+                    </div>
+                </div>
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
+                </div>
+                <div class="layui-tab-item">
+                    <table class="layui-hide" id="tableIdbd" lay-filter="tableFilter"></table>
+                </div>
+            </div>
+        </div>
+        <!--js逻辑-->
+        <script src="/static/lib/layui/layui.js"></script>
+        <script>
+            layui.use(["element", "jquery", "table", "form", "laydate", "okLayer", "okUtils", "okMock"], function () {
 		let table = layui.table;
 		let form = layui.form;
 		let laydate = layui.laydate;
@@ -152,10 +158,23 @@
 				return localStorage.getItem(name);
 			}
 			var mango_tokeny = Storage.get("mangoadmin_userinfo");
+			if (!mango_tokeny) {
+				return okLayer.confirm("你当前未登录MangoAdmin，登录后将同步已购买的记录", function () {
+
+					layer.open({
+						type: 2,
+						title: '用户登录',
+						maxmin: true,
+						skin: 'layui-layer-lan',
+						shadeClose: true, //点击遮罩关闭层
+						area : ['600px' , '480px'],
+						content:'/admin/mango/login.html'//弹框显示的url
+					});
+				})
+			}
 			okLayer.confirm("确定要安装吗？", function () {
 				okUtils.ajax("{:url('installyuancheng')}", "get", {id: id,token: mango_tokeny}, true).done(function (response) {
 					if(response.code=='1'){
-						console.log(response);
 						//userTable.reload();
 						//okUtils.tableSuccessMsg(response.msg);
 						okLayer.greenTickMsg(response.msg, function () {
@@ -166,16 +185,14 @@
 
 						if(response.code =='401'){
 							//未登录
-							okLayer.redCrossMsg(response.msg, function () {
-								layer.open({
-									type: 2,
-									title: '用户登录',
-									maxmin: true,
-									skin: 'layui-layer-lan',
-									shadeClose: true, //点击遮罩关闭层
-									area : ['600px' , '480px'],
-									content:'/admin/mango/login.html'//弹框显示的url
-								});
+							layer.open({
+								type: 2,
+								title: '用户登录',
+								maxmin: true,
+								skin: 'layui-layer-lan',
+								shadeClose: true, //点击遮罩关闭层
+								area : ['600px' , '480px'],
+								content:'/admin/mango/login.html'//弹框显示的url
 							});
 						}else{
 							okLayer.redCrossMsg(response.msg, function () {
@@ -288,25 +305,67 @@
 				});
 			})
 		}
+
+		$('.get-user').click(function(){
+			const Storage = {};
+			Storage.get = function(name) {
+				return localStorage.getItem(name);
+			}
+			var mango_tokeny = Storage.get("mangoadmin_userinfo");
+			if(!mango_tokeny){
+				layer.open({
+					type: 2,
+					title: '用户登录',
+					maxmin: true,
+					skin: 'layui-layer-lan',
+					shadeClose: true, //点击遮罩关闭层
+					area : ['600px' , '480px'],
+					content:'/admin/mango/login.html'//弹框显示的url
+				});
+			}else{
+				layer.open({
+				  content: mango_tokeny
+				  ,btn: ['退出', '取消']
+				  ,yes: function(index, layero){
+				    //按钮【按钮一】的回调
+				    localStorage.removeItem("mangoadmin_userinfo");
+				    layer.msg('退出成功',{time:1500})
+				    setTimeout(layer.close(index),800)
+				  }
+				  ,btn2: function(index, layero){
+				    //按钮【按钮二】的回调
+				    
+				    //return false 开启该代码可禁止点击该按钮关闭
+				  }
+				  ,cancel: function(){ 
+				    //右上角关闭回调
+				    
+				    //return false 开启该代码可禁止点击该按钮关闭
+				  }
+				});
+			}
+		})
+
+		$('.refresh').click(function(){
+			userTable.reload();
+			userTablebd.reload();
+		})
 	})
 </script>
-<!-- 头工具栏模板 -->
-<script type="text/html" id="toolbarTpl">
-	<div class="layui-btn-container">
+        <!-- 头工具栏模板 -->
+        <script type="text/html" id="toolbarTpl">
+            <div class="layui-btn-container">
 		
 	</div>
 </script>
-<!-- 行工具栏模板 -->
-
-
-<script type="text/html" id="statusTpl">
-	{{#  if(d.status == 1){ }}
+        <!-- 行工具栏模板 -->
+        <script type="text/html" id="statusTpl">
+            {{#  if(d.status == 1){ }}
 	<span class="layui-btn layui-btn-normal layui-btn-xs">启用</span>
 	{{#  } else if(d.status != 1) { }}
 	<span class="layui-btn layui-btn-warm layui-btn-xs">停用</span>
 	{{#  } }}
 </script>
-
-
 </body>
+
 </html>

@@ -6,12 +6,39 @@
     <title>芒果系统登录</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <link rel="stylesheet" href="/static/css/oksub.css">
+    <script src="/static/lib/layui/layui.js"></script>
+    <script src="/static/js/jquery-1.5.1.min.js"></script>
     <script type="text/javascript" src="/static/lib/loading/okLoading.js"></script>
+    <script type="text/javascript" src="/static/lib/inputmail.js"></script>
     <style>
         .layui-upload-list img{
 			height:100px;
 			width:100px;
 		}
+        .send{
+            background: #28bcf9;
+            width: 68px;
+            height: 100%;
+            float: right;
+            margin-top: -38px;
+            border-radius: 3px;
+            font-size: 14px;
+            line-height: 38px;
+            color: #fff;
+            text-align: center;
+        }
+        .on_changes{width:232px; position:absolute; top:40px; list-style:none; background:#FFF; border:1px solid #000; display:none; padding:10px;z-index: 100}
+        .on_changes li{margin:8px;padding:4px;}
+        .on_changes li.active{ background:#CEE7FF;}
+        .on_changes li:hover{
+            cursor:default;
+        }
+        .send:hover{
+            cursor:default;
+        }
+        .disable {
+            pointer-events: none;
+        }
 	</style>
 </head>
 
@@ -44,9 +71,27 @@
         <!--form表单-->
         <form class="layui-form layui-form-pane ok-form">
             <div class="layui-form-item">
-                <label class="layui-form-label">用户名</label>
+                <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-block">
-                    <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="mail" id="email" name='email' placeholder="请输入邮箱" autocomplete="off" class="layui-input" lay-verify="required">
+                    <ul class="on_changes">
+                        <li email="">请选择邮箱类型</li>
+                        <li email=""></li>
+                        <li email="@sina.com"></li>
+                        <li email="@163.com"></li>
+                        <li email="@qq.com"></li>
+                        <li email="@hotmail.com"></li>
+                        <li email="@126.com"></li>
+                        <li email="@gmail.com"></li>
+                        <li email="@yahoo.com"></li>
+                    </ul>
+                    <div class="send">发送</div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">验证码</label>
+                <div class="layui-input-block">
+                    <input type="text" id="code" name='code' placeholder="请输入验证码" autocomplete="off" class="layui-input" lay-verify="required">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -64,13 +109,16 @@
         </form>
     </div>
     <!--js逻辑-->
-    <script src="/static/lib/layui/layui.js"></script>
-    <script src="/static/js/jquery.min.js"></script>
     <script>
+    $(function(){
+        $("#email").changeTips({
+            divTip:".on_changes"
+        }); 
+    })
     $("#quzhuce").click(function() {
-        // $("#zhuce").show(100);
-        // $("#denglu").hide(100);
-        window.open("https://ruanzubao.com/pc/user/login.html?method=reg")
+        $("#zhuce").show(100);
+        $("#denglu").hide(100);
+        //window.open("https://ruanzubao.com/pc/user/login.html?method=reg")
     });
 
     $("#qudenglu").click(function() {
@@ -128,22 +176,10 @@
 
         //注册
         form.on("submit(reg)", function(data) {
-            okUtils.ajax("http://stapi.shiliucrm.com/api/user/reg", "post", data.field, true).done(function(response) {
+            okUtils.ajax("http://ruanzubao.com/api/user/register", "post", data.field, true).done(function(response) {
                 //console.log(response);
                 if (response.code == 1) {
                     okLayer.greenTickMsg("注册成功", function() {
-
-                        const Storage = {};
-                        Storage.get = function(name) {
-                            return localStorage.getItem(name);
-                        }
-
-                        Storage.set = function(name, val) {
-                            localStorage.setItem(name, val);
-                        }
-
-                        Storage.set("mangoadmin_userinfo", response.data.token);
-                        console.log(Storage.get("mangoadmin_userinfo"));
 
                         parent.layer.close(parent.layer.getFrameIndex(window.name));
                     });
@@ -159,7 +195,41 @@
             return false;
         });
 
-
+        var timeClock
+        function sendCode() {
+            var timer_num = 60;
+            $(".send").addClass("disable"); //使按钮不能被点击
+            timeClock = setInterval(function(){
+                timer_num--;
+                $('.send').text(timer_num);
+                if (timer_num == 0) {
+                    clearInterval(timeClock);
+                    $('.send').text('发送');
+                    $(".send").removeClass("disable"); //
+                } 
+            },1000)
+        }
+        $('.send').click(function(){
+            //判断邮箱
+            var email = $("#email").val();
+            if(!email){
+                return layer.msg('邮箱不能为空');
+            }
+            $.ajax({
+                url:'http://ruanzubao.com/api/ems/send',
+                data:{email:email},
+                type:'post',
+                success:function(e){
+                    if(e.code == 1){
+                        sendCode();
+                        layer.msg(e.msg);
+                    }else{
+                        layer.msg(e.msg);
+                    }   
+                }
+            })
+            
+        })
     });
     </script>
 </body>
