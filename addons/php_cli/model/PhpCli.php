@@ -10,7 +10,7 @@
 // | github开源项目：https://github.com/zhongshaofa/EasyAdmin
 // +----------------------------------------------------------------------
 
-namespace addons\login_page\model;
+namespace addons\php_cli\model;
 
 
 use app\common\model\TimeModel;

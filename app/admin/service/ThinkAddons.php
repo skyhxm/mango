@@ -294,9 +294,10 @@ class ThinkAddons
     // 卸载插件
     public function uninstall(string $name)
     {
-        
         // 实例化插件
         $object = $this->getInstance($name);
+        
+        // dd(1);
         // 获取插件基础信息
         //$info = $object->getInfo();
         $info = $this->getPluginInfo($name);
