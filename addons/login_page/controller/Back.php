@@ -17,7 +17,8 @@ class Back extends Addon
     private static $_model_name = 'addons\login_page\model\LoginPage';
     public function __construct(App $app)
     {
-        parent::__construct($app,self::$_addon_name,self::$_model_name);
+        $js_path = './addons/js/back.js';
+        parent::__construct($app,self::$_addon_name,self::$_model_name,$js_path);
     }
 
     /**

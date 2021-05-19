@@ -18,24 +18,25 @@ class Addon extends AdminController
     {
         parent::__construct($app);
         View::config([
-			'view_path' => '../addons/'.$_addon_name.'/view'.DIRECTORY_SEPARATOR
+			'view_path' => './addons/'.$_addon_name.'/view'.DIRECTORY_SEPARATOR
 		]);
-        $this->thisControllerJsPath = 'addons/'.$_addon_name.'/js/back.js';
-        $this->handle();
+        $this->thisControllerJsPath = request()->domain().'/addons/'.$_addon_name.'/js/back.js';
+        $this->handle($_addon_name);
 		View::layout($this->layout);
 		View::assign('version',time());
         $this->model = new $_model_name();
     }
 
-    public function handle()
+    public function handle($_addon_name)
     {
         list($thisModule, $thisController, $thisAction) = [app('http')->getName(), Request::controller(), Request::action()];
         list($thisControllerArr, $jsPath) = [explode('.', $thisController), null];
         foreach ($thisControllerArr as $vo) {
             empty($jsPath) ? $jsPath = parse_name($vo) : $jsPath .= '/' . parse_name($vo);
         }
-        $autoloadJs = file_exists(root_path('public')."static/{$thisModule}/js/{$jsPath}.js") ? true : false;
-        // dump(root_path('public')."static/{$thisModule}/js/{$jsPath}.js");
+        // $autoloadJs = file_exists(root_path('public')."static/{$thisModule}/js/{$jsPath}.js") ? true : false;
+        $autoloadJs = file_exists("./addons/{$_addon_name}/js/{$jsPath}.js") ? true : false;
+        // dump("./addons/{$_addon_name}/js/{$jsPath}.js");
         // dump($autoloadJs);
         $thisControllerJsPath = $this->thisControllerJsPath;
         $adminModuleName = config('app.admin_alias_name');

@@ -29,7 +29,10 @@ class ViewInit
         foreach ($thisControllerArr as $vo) {
             empty($jsPath) ? $jsPath = parse_name($vo) : $jsPath .= '/' . parse_name($vo);
         }
-        $autoloadJs = file_exists(root_path('public')."static/{$thisModule}/js/{$jsPath}.js") ? true : false;
+        // $autoloadJs = file_exists(root_path('public')."static/{$thisModule}/js/{$jsPath}.js") ? true : false;
+        $autoloadJs = file_exists("static/{$thisModule}/js/{$jsPath}.js") ? true : false;
+
+        // dd("static/{$thisModule}/js/{$jsPath}.js");
         $thisControllerJsPath = "{$thisModule}/js/{$jsPath}.js";
         $adminModuleName = config('app.admin_alias_name');
         $isSuperAdmin = session('admin.id') == AdminConstant::SUPER_ADMIN_ID ? true : false;
@@ -44,6 +47,7 @@ class ViewInit
             'version'              => env('app_debug') ? time() : ConfigService::getVersion(),
         ];
 
+        // dd($data);
         View::assign($data);
         $request->adminModuleName = $adminModuleName;
         return $next($request);
