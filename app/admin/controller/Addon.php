@@ -2,11 +2,11 @@
 namespace app\admin\controller;
 
 use app\admin\traits\Curd;
+use app\common\constants\AdminConstant;
 use app\common\controller\AdminController;
 use EasyAdmin\annotation\NodeAnotation;
-use think\facade\View;
 use think\facade\Request;
-use app\common\constants\AdminConstant;
+use think\facade\View;
 
 class Addon extends AdminController
 {
@@ -14,23 +14,23 @@ class Addon extends AdminController
     protected $layout = 'layout/default';
     protected $thisControllerJsPath;
 
-    public function __construct($app,$_addon_name,$_model_name)
+    public function __construct($app, $_addon_name, $_model_name)
     {
         parent::__construct($app);
         View::config([
-			'view_path' => './addons/'.$_addon_name.'/view'.DIRECTORY_SEPARATOR
-		]);
-        $this->thisControllerJsPath = request()->domain().'/addons/'.$_addon_name.'/js/back.js';
+            'view_path' => './addons/' . $_addon_name . '/view' . DIRECTORY_SEPARATOR,
+        ]);
+        $this->thisControllerJsPath = request()->domain() . '/addons/' . $_addon_name . '/js/back.js';
         $this->handle($_addon_name);
-		View::layout($this->layout);
-		View::assign('version',time());
+        View::layout($this->layout);
+        View::assign('version', time());
         $this->model = new $_model_name();
     }
 
     public function handle($_addon_name)
     {
         list($thisModule, $thisController, $thisAction) = [app('http')->getName(), Request::controller(), Request::action()];
-        list($thisControllerArr, $jsPath) = [explode('.', $thisController), null];
+        list($thisControllerArr, $jsPath)               = [explode('.', $thisController), null];
         foreach ($thisControllerArr as $vo) {
             empty($jsPath) ? $jsPath = parse_name($vo) : $jsPath .= '/' . parse_name($vo);
         }
@@ -39,9 +39,9 @@ class Addon extends AdminController
         // dump("./addons/{$_addon_name}/js/{$jsPath}.js");
         // dump($autoloadJs);
         $thisControllerJsPath = $this->thisControllerJsPath;
-        $adminModuleName = config('app.admin_alias_name');
-        $isSuperAdmin = session('admin.id') == AdminConstant::SUPER_ADMIN_ID ? true : false;
-        $data = [
+        $adminModuleName      = config('app.admin_alias_name');
+        $isSuperAdmin         = session('admin.id') == AdminConstant::SUPER_ADMIN_ID ? true : false;
+        $data                 = [
             'adminModuleName'      => $adminModuleName,
             'thisController'       => parse_name($thisController),
             'thisAction'           => $thisAction,
@@ -55,11 +55,12 @@ class Addon extends AdminController
         View::assign($data);
     }
 
-        /**
+    /**
      * @NodeAnotation(title="删除")
      */
     public function delete()
-    {   $id = input('id');
+    {
+        $id  = input('id');
         $row = $this->model->whereIn('id', $id)->select();
         $row->isEmpty() && $this->error('数据不存在');
         try {
@@ -70,12 +71,12 @@ class Addon extends AdminController
         $save ? $this->success('删除成功') : $this->error('删除失败');
     }
 
-        /**
+    /**
      * @NodeAnotation(title="编辑")
      */
     public function edit()
     {
-        $id = input('id');
+        $id  = input('id');
         $row = $this->model->find($id);
         empty($row) && $this->error('数据不存在');
         if ($this->request->isAjax()) {
@@ -99,10 +100,10 @@ class Addon extends AdminController
     public function add()
     {
         if ($this->request->isAjax()) {
-            $post = $this->request->post();
-            $authIds = $this->request->post('auth_ids', []);
+            $post             = $this->request->post();
+            $authIds          = $this->request->post('auth_ids', []);
             $post['auth_ids'] = implode(',', array_keys($authIds));
-            $rule = [];
+            $rule             = [];
             $this->validate($post, $rule);
             try {
                 $save = $this->model->save($post);
@@ -124,7 +125,7 @@ class Addon extends AdminController
                 return $this->selectList();
             }
             list($page, $limit, $where) = $this->buildTableParames();
-            $count = $this->model
+            $count                      = $this->model
                 ->where($where)
                 ->count();
             $list = $this->model

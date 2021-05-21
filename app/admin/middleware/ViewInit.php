@@ -5,13 +5,12 @@
 // +----------------------------------------------------------------------
 // | PHP交流群: 763822524
 // +----------------------------------------------------------------------
-// | 开源协议  https://mit-license.org 
+// | 开源协议  https://mit-license.org
 // +----------------------------------------------------------------------
 // | github开源项目：https://github.com/zhongshaofa/EasyAdmin
 // +----------------------------------------------------------------------
 
 namespace app\admin\middleware;
-
 
 use app\admin\service\ConfigService;
 use app\common\constants\AdminConstant;
@@ -25,18 +24,18 @@ class ViewInit
     public function handle($request, \Closure $next)
     {
         list($thisModule, $thisController, $thisAction) = [app('http')->getName(), Request::controller(), $request->action()];
-        list($thisControllerArr, $jsPath) = [explode('.', $thisController), null];
+        list($thisControllerArr, $jsPath)               = [explode('.', $thisController), null];
         foreach ($thisControllerArr as $vo) {
             empty($jsPath) ? $jsPath = parse_name($vo) : $jsPath .= '/' . parse_name($vo);
         }
-        // $autoloadJs = file_exists(root_path('public')."static/{$thisModule}/js/{$jsPath}.js") ? true : false;
-        $autoloadJs = file_exists("static/{$thisModule}/js/{$jsPath}.js") ? true : false;
+        $autoloadJs = file_exists(root_path('public') . "static/{$thisModule}/js/{$jsPath}.js") ? true : false;
+        // $autoloadJs = file_exists("static/{$thisModule}/js/{$jsPath}.js") ? true : false;
 
         // dd("static/{$thisModule}/js/{$jsPath}.js");
         $thisControllerJsPath = "{$thisModule}/js/{$jsPath}.js";
-        $adminModuleName = config('app.admin_alias_name');
-        $isSuperAdmin = session('admin.id') == AdminConstant::SUPER_ADMIN_ID ? true : false;
-        $data = [
+        $adminModuleName      = config('app.admin_alias_name');
+        $isSuperAdmin         = session('admin.id') == AdminConstant::SUPER_ADMIN_ID ? true : false;
+        $data                 = [
             'adminModuleName'      => $adminModuleName,
             'thisController'       => parse_name($thisController),
             'thisAction'           => $thisAction,
@@ -52,6 +51,5 @@ class ViewInit
         $request->adminModuleName = $adminModuleName;
         return $next($request);
     }
-
 
 }

@@ -28,7 +28,7 @@ return [
     'display_cache'      => true,
     // 字符替换
     'tpl_replace_string' => [
-        '__STATIC__' => Env::get('mangoadmin.static_path', '/static'),
-        '__JS__'     => '/static/javascript',
+        '__STATIC__' => Env::get('mango.static_path', '/public/static'),
+        '__JS__'     => '/public/static/javascript',
     ],
 ];
