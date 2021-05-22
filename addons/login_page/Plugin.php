@@ -29,14 +29,17 @@ class Plugin extends Addons	// 需继承think\Addons类
 	{
 		$menu = [
             [
-				'name' => 'login_page',
-                'href'    => '/addons/login_page/back/index',
-                'title'   => '登录页面',
+                'href'    => '',
+                'title'   => '插件管理',
                 'icon'    => 'fa fa-list',
                 'ismenu'  => 1,//是否是菜单
+                'sublist' => [
+                    ['href' => '/addons/login_page/index/index', 'title' => '登录页面', 'ismenu' => 1
+                	],
+                ]
             ]
         ];
-        Menu::create($menu,1);
+        Menu::create($menu);
 		return true;
 	}
 

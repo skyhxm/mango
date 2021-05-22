@@ -31,7 +31,7 @@
 ?>
     <div class="system-message {$codeText}">
         <div class="image">
-            <img src="/static/common/images/{$codeText}.svg" alt="" width="150" />
+            <img src="__STATIC__/common/images/{$codeText}.svg" alt="" width="150" />
         </div>
         <h1><?php echo(strip_tags($msg));?></h1>
         <p class="jump">

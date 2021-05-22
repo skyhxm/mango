@@ -1,16 +1,6 @@
     define(["jquery", "okLayer", "okUtils", "okMock"], function ($,okLayer,okUtils,okMock ) {
     let table = layui.table;
     let form = layui.form;
-    // let laydate = layui.laydate;
-    // let okLayer = layui.okLayer;
-    // let okUtils = layui.okUtils;
-    // let okMock = layui.okMock;
-    // let $ = layui.jquery;
-    // alert(okLayer);
-
-    // okLoading.close($);
-
-
     //全部插件
     let userTable = table.render({
         elem: '#tableId',
@@ -105,14 +95,14 @@
             case "state":
                 state(data.name);
                 break;
-            case "installyuancheng":
-                installyuancheng(data.name);
+            case "remoteInstall":
+                remoteInstall(data.name);
                 break;
         }
     });
 
     //安装远程插件
-    function installyuancheng(id) {
+    function remoteInstall(id) {
         const Storage = {};
         Storage.get = function(name) {
             return localStorage.getItem(name);
@@ -133,7 +123,7 @@
             })
         }
         okLayer.confirm("确定要安装吗？", function () {
-            okUtils.ajax("{:url('installyuancheng')}", "get", {id: id,token: mango_tokeny}, true).done(function (response) {
+            okUtils.ajax("remoteInstall", "get", {id: id,token: mango_tokeny}, true).done(function (response) {
                 if(response.code=='1'){
                     //userTable.reload();
                     //okUtils.tableSuccessMsg(response.msg);
@@ -190,7 +180,7 @@
     //安装本地插件
     function install(id) {
         okLayer.confirm("确定要安装吗？", function () {
-            okUtils.ajax("{:url('install')}", "get", {id: id}, true).done(function (response) {
+            okUtils.ajax("install", "get", {id: id}, true).done(function (response) {
                 if(response.code==1){
                     console.log(response);
                     //userTable.reload();
@@ -223,7 +213,7 @@
 
     function uninstall(id) {
         okLayer.confirm("确定要卸载安装吗？", function () {
-            okUtils.ajax("{:url('uninstall')}", "get", {id: id}, true).done(function (response) {
+            okUtils.ajax("uninstall", "get", {id: id}, true).done(function (response) {
                 if(response.code==1){
                     console.log(response);
                     //userTable.reload();
@@ -245,7 +235,7 @@
     }
     function state(id) {
         okLayer.confirm("确定执行此操作吗？", function () {
-            okUtils.ajax("{:url('state')}", "get", {id: id}, true).done(function (response) {
+            okUtils.ajax("state", "get", {id: id}, true).done(function (response) {
                 if(response.code==1){
                     console.log(response);
                     //userTable.reload();

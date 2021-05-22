@@ -45,9 +45,20 @@
         <!--form表单-->
         <form class="layui-form layui-form-pane ok-form">
             <div class="layui-form-item">
-                <label class="layui-form-label">用户名</label>
+                <label class="layui-form-label">邮箱</label>
                 <div class="layui-input-block">
-                    <input type="text" name="account" placeholder="请输入用户名" autocomplete="off" class="layui-input" lay-verify="required">
+                    <input type="mail" id="email" name='account' placeholder="请输入邮箱" autocomplete="off" class="layui-input" lay-verify="required">
+                    <ul class="on_changes">
+                        <li email="">请选择邮箱类型</li>
+                        <li email=""></li>
+                        <li email="@sina.com"></li>
+                        <li email="@163.com"></li>
+                        <li email="@qq.com"></li>
+                        <li email="@hotmail.com"></li>
+                        <li email="@126.com"></li>
+                        <li email="@gmail.com"></li>
+                        <li email="@yahoo.com"></li>
+                    </ul>
                 </div>
             </div>
             <div class="layui-form-item">

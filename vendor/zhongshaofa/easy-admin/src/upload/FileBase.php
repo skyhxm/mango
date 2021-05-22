@@ -5,13 +5,12 @@
 // +----------------------------------------------------------------------
 // | PHP交流群: 763822524
 // +----------------------------------------------------------------------
-// | 开源协议  https://mit-license.org 
+// | 开源协议  https://mit-license.org
 // +----------------------------------------------------------------------
 // | github开源项目：https://github.com/zhongshaofa/EasyAdmin
 // +----------------------------------------------------------------------
 
 namespace EasyAdmin\upload;
-
 
 use think\facade\Filesystem;
 use think\File;
@@ -110,7 +109,7 @@ class FileBase
     public function save()
     {
         $this->completeFilePath = Filesystem::disk('public')->putFile('upload', $this->file);
-        $this->completeFileUrl = request()->domain() . '/' . str_replace(DIRECTORY_SEPARATOR, '/', $this->completeFilePath);
+        $this->completeFileUrl  = request()->domain() . '/public/' . str_replace(DIRECTORY_SEPARATOR, '/', $this->completeFilePath);
     }
 
     /**

@@ -341,7 +341,7 @@ class Plugin extends AdminController
             foreach ($list as $key => $value) {
                 // 增加右侧按钮组
                 $str   = '';
-                $file  =  $value['name'];
+                $file  = $value['name'] ? $value['name'] : 'addons';
                 $class = "\\addons\\{$file}\\Plugin";
                 if (class_exists($class)) {
                     // 容器类的工作由think\Container类完成，但大多数情况我们只需要通过app助手函数或者think\App类即可容器操作
@@ -359,7 +359,7 @@ class Plugin extends AdminController
                         }
                     } else {
                         // 未安装，增加安装按钮
-                        $str = '<a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:void(0)" data-name="' . $file . '" lay-event="installyuancheng"><i class="fa fa-edit"></i> 安装</a>';
+                        $str = '<a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:void(0)" data-name="' . $file . '" lay-event="remoteInstall"><i class="fa fa-edit"></i> 安装</a>';
                     }
 
                     $list[$key]['button'] = $str;
@@ -369,7 +369,7 @@ class Plugin extends AdminController
                 } else {
                     //本地没安装此插件跳出
                     // 未安装，增加安装按钮
-                    $str = '<a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:void(0)" data-name="' . $file . '" lay-event="installyuancheng"><i class="fa fa-edit"></i> 安装</a>';
+                    $str = '<a class="layui-btn layui-btn-normal layui-btn-xs" href="javascript:void(0)" data-name="' . $file . '" lay-event="remoteInstall"><i class="fa fa-edit"></i> 安装</a>';
 
                     $list[$key]['status']  = 0;
                     $list[$key]['name']    = $value['name']; //插件识别标识
@@ -389,8 +389,9 @@ class Plugin extends AdminController
     }
 
     // 安装远程插件
-    public function installyuancheng(string $id)
+    public function remoteInstall(string $id)
     {
+        // dd(input());
         $parmers       = input();
         $caomei_tokeny = '';
         if (isset($parmers['token']) && !empty($parmers['token'])) {
@@ -430,11 +431,13 @@ class Plugin extends AdminController
      */
     public static function download($name, $extend = [])
     {
-        $addonTmpDir = $_SERVER['DOCUMENT_ROOT'] . '/../runtime/addons/';
+        $addonTmpDir = './runtime/addons/';
+
         if (!is_dir($addonTmpDir)) {
             @mkdir($addonTmpDir, 0755, true);
         }
         $tmpFile = $addonTmpDir . $name . ".zip";
+        // dd($tmpFile);
         $options = [
             CURLOPT_CONNECTTIMEOUT => 30,
             CURLOPT_TIMEOUT        => 30,
@@ -452,8 +455,8 @@ class Plugin extends AdminController
                 //如果传回的是一个下载链接,则再次下载
                 if (isset($json['data']) && isset($json['data']['file'])) {
                     array_pop($options);
-                    $ret = Http::sendRequest(self::getServerUrl() . $json['data']['file'], 
-                    array_merge(['name' => $name], $extend), 'GET', $options);
+                    $ret = Http::sendRequest(self::getServerUrl() . $json['data']['file'],
+                        array_merge(['name' => $name], $extend), 'GET', $options);
                     if (!$ret['ret']) {
                         //下载返回错误，抛出异常
                         return ['msg' => $json['msg'], 'code' => $json['code'], 'data' => $json['data']];
@@ -483,10 +486,10 @@ class Plugin extends AdminController
      */
     public static function unzip($name)
     {
-        $addonTmpDir = $_SERVER['DOCUMENT_ROOT'] . '/../runtime/addons/';
+        $addonTmpDir = './runtime/addons/';
         $file        = $addonTmpDir . $name . ".zip";
 
-        $dir = $_SERVER['DOCUMENT_ROOT'] . '/../addons/';
+        $dir = './addons/';
         if (class_exists('ZipArchive')) {
             $zip = new ZipArchive;
             if ($zip->open($file) !== true) {
