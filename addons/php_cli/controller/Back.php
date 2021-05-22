@@ -1,10 +1,7 @@
 <?php
 namespace addons\php_cli\controller;
 
-use addons\login_page\model\LoginPage;
-use EasyAdmin\annotation\ControllerAnnotation;
 use app\admin\controller\Addon;
-use think\App;
 
 /**
  * Class Back
@@ -15,16 +12,16 @@ class Back extends Addon
 {
     private static $_addon_name = 'php_cli';
     private static $_model_name = 'addons\php_cli\model\PhpCli';
-    public function __construct(App $app)
+    public function __construct()
     {
-        parent::__construct($app,self::$_addon_name,self::$_model_name);
+        parent::__construct(self::$_addon_name, self::$_model_name);
     }
 
     /**
      * 基类文件use app\admin\controller\Addon;
      */
 
-     /**
+    /**
      * @NodeAnotation(title="列表")
      */
     public function index()
@@ -37,7 +34,7 @@ class Back extends Addon
                 return json(['code' => 1, 'msg' => '只支持php相关命令']);
             }
 
-            $a = str_replace('php think', 'php ../think', $a);
+            // $a = str_replace('php think', 'php ../think', $a);
             // 调用命令行的指令
             $output = `$a`;
             $output = iconv("utf-8", "gbk//IGNORE", $output);
@@ -46,5 +43,5 @@ class Back extends Addon
         }
         return $this->fetch();
     }
-    
+
 }

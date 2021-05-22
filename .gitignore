@@ -13,3 +13,4 @@ composer.phar
 app/test/
 /addons
 .svn
+*_bak

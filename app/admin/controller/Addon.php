@@ -14,9 +14,9 @@ class Addon extends AdminController
     protected $layout = 'layout/default';
     protected $thisControllerJsPath;
 
-    public function __construct($app, $_addon_name, $_model_name)
+    public function __construct($_addon_name, $_model_name)
     {
-        parent::__construct($app);
+        parent::__construct(app());
         View::config([
             'view_path' => './addons/' . $_addon_name . '/view' . DIRECTORY_SEPARATOR,
         ]);
