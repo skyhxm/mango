@@ -20,7 +20,7 @@
 
 * 官方网站：[https://ruanzubao.com](https://ruanzubao.com)
 
-* 文档地址：[https://ruanzubao.com/docs](https://ruanzubao.com/docs)
+* 文档地址：[http://doc.ruanzubao.com](http://doc.ruanzubao.com)
 
 * 演示地址：[https://ruanzubao.com/mango](https://ruanzubao.com/mango)（账号：admin，密码：123456。备注：只有查看信息的权限）
  
