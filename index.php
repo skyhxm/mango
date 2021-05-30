@@ -25,7 +25,7 @@ define('ROOT_PATH', __DIR__ . DS);
 
 // 判断是否安装程序
 if (!is_file(ROOT_PATH . 'config' . DS . 'install' . DS . 'lock' . DS . 'install.lock')) {
-    exit(header("location:/install.php"));
+    exit(header("location:/public/install.php"));
 }
 
 // 执行HTTP应用并响应
