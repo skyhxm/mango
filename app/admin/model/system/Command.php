@@ -11,7 +11,4 @@ class Command extends TimeModel
 
     protected $deleteTime = false;
 
-    
-    
-
 }

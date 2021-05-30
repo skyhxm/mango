@@ -1,4 +1,5 @@
     define(["jquery", "okLayer", "okUtils", "okMock"], function ($,okLayer,okUtils,okMock ) {
+
     let table = layui.table;
     let form = layui.form;
     //全部插件
@@ -300,4 +301,33 @@
         userTable.reload();
         userTablebd.reload();
     })
+    
+
+    form.verify({
+			
+    });
+
+    form.on("submit(add)", function (data) {
+        okUtils.ajax($('#plugs_action').attr('action'), "post", data.field, true).done(function (response) {
+            //console.log(response);
+            if(response.code==1){
+                okLayer.greenTickMsg("编辑成功", function () {
+                    parent.layer.close(parent.layer.getFrameIndex(window.name));
+                });
+            }else{
+                okLayer.greenTickMsg(response.msg, function () {
+                    
+                })
+            }
+            
+        }).fail(function (error) {
+            console.log(error)
+        });
+        return false;
+    });
+
+    var Controller = {
+        index:function(){}
+    }
+    return Controller;
 })

@@ -7,105 +7,372 @@
         </ul>
         <div class="layui-tab-content">
             <div class="layui-tab-item layui-show">
-                <form id="app-form" class="layui-form layuimini-form">
-                    <div class="layui-form-item" pane="">
-                        <label class="layui-form-label"></label>
-                        <div class="layui-input-block">
-                            <input type="checkbox" name="like1[write]" lay-skin="primary" title="关联模型" checked="">
-                            <input type="checkbox" name="like1[read]" lay-skin="primary" title="全局模型类">
-                            <input type="checkbox" name="like1[game]" lay-skin="primary" title="删除模式">
-                            <input type="checkbox" name="like1[game]" lay-skin="primary" title="强制覆盖模式">
-                        </div>
+                <form id="curd_form" class="layui-form layuimini-form layui-form-pane">
+                    <input type="hidden" name="type" value="crud">
+                    <input type="hidden" name="numbers" value="0">
+                    <input type="hidden" name="cmd" value="0">
+                    <div class="layui-form-item" id="show-model">
+                        <input type="checkbox" name="set_model[relation]" lay-skin="primary" title="关联模型" lay-filter="showmodel">
+                        <input type="checkbox" name="set_model[global]" lay-skin="primary" title="全局模型类">
+                        <input type="checkbox" name="set_model[delete]" lay-skin="primary" title="删除模式">
+                        <input type="checkbox" name="set_model[force]" lay-skin="primary" title="强制覆盖模式">
                     </div>
-                    <div style="display: flex;flex-direction: row;justify-content: space-between;">
+                    <div class="layui-form-item">
+                        <h4>主表设置</h4>
+                        <hr>
+                    </div>
+                    <div id="main-content">
                         <div class="layui-inline">
-                            <label class="layui-form-label">主表设置</label>
-                            <div class="layui-input-inline">
-                                <select name="modules" lay-verify="required" lay-search="">
-                                    <option value="">直接选择或搜索选择</option>
-                                    <option value="1">layer</option>
-                                </select>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">行内表单</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="number" autocomplete="off" class="layui-input">
+                                <div class="layui-input-inline short">
+                                    <h6>请选择主表</h6>
+                                    <select name="mtable" lay-verify="required" lay-search="" lay-filter="main-table" class="layui-select main-table">
+                                        {volist name='tables' id='vo'}
+                                            <option value="{$vo}">{$vo}</option>
+                                        {/volist}
+                                    </select>
                                 </div>
-                            </div>
-                            <div class="layui-inline">
-                                <label class="layui-form-label">行内表单</label>
-                                <div class="layui-input-inline">
-                                    <input type="text" name="number" autocomplete="off" class="layui-input">
+                                <div class="layui-input-inline short">
+                                    <h6>自定义控制器名</h6>
+                                    <input type="text" name="controller" autocomplete="off" class="layui-input" placeholder="支持目录层级,以/分隔">
                                 </div>
+                                <div class="layui-input-inline short">
+                                    <h6>自定义模型名</h6>
+                                    <input type="text" name="model" autocomplete="off" class="layui-input" placeholder="不支持目录层级">
+                                </div>
+                                <div class="layui-input-inline short fields-div">
+                                    <div class="layui-form-item">
+                                        <h6>请选择显示字段(默认全部)</h6>
+                                    </div>
+                                    <input type="hidden" name="mfields">
+                                    <div class="layui-input-inline demo xm-select-data field-data"></div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                    </div>
+                    <div id="table-set">
+                        <!-- 关联模型 -->
+                        <div class="layui-form-item">
+                            <h4>关联表设置</h4>
+                            <hr>
+                        </div>
+                        <div id="add-temptl">
+                           <!-- 动态div -->
+                        </div>
+                        <div class="layui-form-item">
+                            <button id="add-content" type="button" class="layui-btn chang-color">追加关联模型</button>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                    </div>
+                    <!-- 字段识别设置 (与之匹配的字段都将生成相应组件) -->
+                    <div class="layui-form-item">
+                        <h4>字段识别设置<span>(与之匹配的字段都将生成相应组件)</span></h4>
+                        <hr>
+                    </div>
+                    <div id="main-content-field">
+                        <div class="layui-inline">
+                            <div class="layui-input-inline short">
+                                <h6>复选框后缀</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为checkbox">
                             </div>
-                            <div class="layui-input-inline">
-                                <select name="modules" lay-verify="required" lay-search="">
-                                    <option value="">直接选择或搜索选择</option>
-                                    <option value="1">layer</option>
-                                </select>
+                            <div class="layui-input-inline short">
+                                <h6>单选框后缀</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为radio">
+                            </div>
+                             <div class="layui-input-inline short">
+                                <h6>图片类型后缀(单)</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为image,logo,photo,icon">
+                            </div>
+                             <div class="layui-input-inline short">
+                                <h6>图片类型后缀(多)</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为images,photos,icons">
+                            </div>
+                            <div class="layui-input-inline short">
+                                <h6>文件类型后缀</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为file,files">
+                            </div>
+                             <div class="layui-input-inline short">
+                                <h6>日期时间后缀</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为date">
+                            </div>
+                            <div class="layui-input-inline short">
+                                <h6>开关后缀</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为status">
+                            </div>
+                            <div class="layui-input-inline short">
+                                <h6>动态下拉后缀(单)</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为select">
+                            </div>
+                            <div class="layui-input-inline short">
+                                <h6>忽略的字段</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为update_time,delete_time">
+                            </div>
+                             <div class="layui-input-inline short">
+                                <h6>排序字段</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为sort">
+                            </div>
+                            <div class="layui-input-inline short">
+                                <h6>富文本编辑器</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为editor">
+                            </div>
+                             <div class="layui-input-inline short">
+                                <h6>价格字段</h6>
+                                <input type="text" name="number" autocomplete="off" class="layui-input" placeholder="默认为price">
                             </div>
                         </div>
                     </div>
                     <div class="layui-form-item">
                     </div>
+                    <!-- 生成命令行-->
                     <div class="layui-form-item">
-                        <label class="layui-form-label">类型</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="type" class="layui-input" lay-verify="required" placeholder="请输入类型" value="">
-                        </div>
+                        <h4>生成命令行</h4>
+                        <hr>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="create_cmd" autocomplete="off" class="layui-input">
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">参数</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="params" class="layui-input" lay-verify="required" placeholder="请输入参数" value="">
-                        </div>
+                    </div>
+                    <!-- 返回结果-->
+                    <div class="layui-form-item">
+                        <h4>返回结果</h4>
+                        <hr>
+                    </div>
+                    <div class="layui-input-inline">
+                        <textarea id="res_msg" name="content" rows="10" class="layui-textarea" placeholder="请输入返回结果"></textarea>
                     </div>
                     <div class="layui-form-item">
-                        <label class="layui-form-label">命令</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="command" class="layui-input" lay-verify="required" placeholder="请输入命令" value="">
-                        </div>
                     </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">返回结果</label>
-                        <div class="layui-input-block">
-                            <textarea name="content" rows="20" class="layui-textarea editor" 返回结果 placeholder="请输入返回结果"></textarea>
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">执行时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="executetime" class="layui-input" placeholder="请输入执行时间" value="">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">创建时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="createtime" class="layui-input" placeholder="请输入创建时间" value="">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">更新时间</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="updatetime" class="layui-input" placeholder="请输入更新时间" value="">
-                        </div>
-                    </div>
-                    <div class="layui-form-item">
-                        <label class="layui-form-label">状态</label>
-                        <div class="layui-input-block">
-                            <input type="text" name="status" class="layui-input" lay-verify="required" placeholder="请输入状态" value="failured">
-                        </div>
-                    </div>
-                    <div class="hr-line"></div>
-                    <div class="layui-form-item text-center">
-                        <button type="submit" class="layui-btn layui-btn-normal layui-btn-sm" lay-submit>确认</button>
+                    <div class="layui-form-item text-left">
+                        <div class="layui-btn layui-btn-normal layui-btn-sm" id='create_cmd'>生成命令行</div>
+                        <div class="layui-btn layui-btn-sm" id='create'>立即执行</div>
                         <button type="reset" class="layui-btn layui-btn-primary layui-btn-sm">重置</button>
                     </div>
                 </form>
             </div>
-            <div class="layui-tab-item">内容3</div>
-            <div class="layui-tab-item">内容4</div>
-            <div class="layui-tab-item">内容5</div>
+            <div class="layui-tab-item">
+                <form id="menu_form" class="layui-form layuimini-form layui-form-pane">
+                    <input type="hidden" name="type" value="menu">
+                    <input type="hidden" name="numbers" value="0">
+                    <input type="hidden" name="cmd" value="0">
+                    <div class="layui-form-item" id="show-model">
+                        <input type="checkbox" name="set_model[delete]" lay-skin="primary" title="删除模式">
+                        <input type="checkbox" name="set_model[force]" lay-skin="primary" title="强制覆盖模式">
+                    </div>
+                    <div class="layui-form-item">
+                        <h4>控制器设置</h4>
+                        <hr>
+                    </div>
+                    <div id="main-content">
+                        <div class="layui-item">
+                            <div class="layui-input-item short">
+                                <h6>请选择控制器</h6>
+                                <select name="mtable" lay-verify="required" lay-search="" lay-filter="main-table" class="layui-select main-table">
+                                    {volist name='controllers' id='vo'}
+                                        <option value="{$vo.id}">{$vo.name}</option>
+                                    {/volist}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                    </div>
+                    <!-- 生成命令行-->
+                    <div class="layui-form-item">
+                        <h4>菜单名称</h4>
+                        <hr>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="name_menu" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                    </div>
+                    <!-- 生成命令行-->
+                    <div class="layui-form-item">
+                        <h4>生成命令行</h4>
+                        <hr>
+                    </div>
+                    <div class="layui-input-inline">
+                        <input type="text" name="create_cmd_menu" autocomplete="off" class="layui-input">
+                    </div>
+                    <div class="layui-form-item">
+                    </div>
+                    <!-- 返回结果-->
+                    <div class="layui-form-item">
+                        <h4>返回结果</h4>
+                        <hr>
+                    </div>
+                    <div class="layui-input-inline">
+                        <textarea id="res_menu_msg" name="content" rows="10" class="layui-textarea" placeholder="请输入返回结果"></textarea>
+                    </div>
+                    <div class="layui-form-item">
+                    </div>
+                    <div class="layui-form-item text-left">
+                        <div class="layui-btn layui-btn-normal layui-btn-sm" id='create_cmd_menu'>生成命令行</div>
+                        <div class="layui-btn layui-btn-sm" id='create_menu'>立即执行</div>
+                        <button type="reset" class="layui-btn layui-btn-primary layui-btn-sm">重置</button>
+                    </div>
+                </form>
+            </div>
+            <div class="layui-tab-item"></div>
+        </div>
+    </div>
+    <div id="tpl" style="display: none;">
+        <div class="main-content">
+            <div class="layui-inline">
+                    <div class="layui-input-inline short">
+                        <h6>请选择关联表</h6>
+                        <select name="otable[]" lay-verify="required" lay-search="" lay-filter="main-table" class="layui-select other-table">
+                            {volist name='tables' id='vo'}
+                                <option value="{$vo}">{$vo}</option>
+                            {/volist}
+                        </select>
+                    </div>
+                    <div class="layui-input-inline short">
+                        <h6>请选择关联类型</h6>
+                        <select name="otype[]" lay-verify="required" lay-search="" lay-filter="other-type" class="layui-select other-type">
+                            <option value="belongsto">belongsto</option>
+                            <option value="hasone">hasone</option>
+                        </select>
+                    </div>
+                    <div class="layui-input-inline short other-key">
+                        <h6>关联外键</h6>
+                        <select name="okey[]" lay-verify="required" lay-search="" lay-filter="" class="layui-select">
+                        </select>
+                    </div>
+                    <div class="layui-input-inline short main-key">
+                        <h6>关联主键</h6>
+                        <select name="mkey[]" lay-verify="required" lay-search="" lay-filter="" class="layui-select">
+                        </select>
+                    </div>
+                    <div class="layui-input-inline short fields-div">
+                        <div class="layui-form-item">
+                            <h6>请选择显示字段(默认全部)</h6>
+                        </div>
+                        <input type="hidden" name="ofields[]">
+                        <div class="layui-input-inline demo xm-select-data field-data"></div>
+                    </div>
+                    <div class="layui-input-inline short">
+                        <button type="button" class="layui-btn chang-color layui-btn-danger del-btn">移除</button>
+                    </div>
+            </div>
+        </div>
+         <div class="layui-form-item">
         </div>
     </div>
 </div>
+<style>
+    #show-model{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    #show-model:first-child{
+        margin-left:-10px;
+    }
+    .main-content{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .layui-input-inline{
+        width: 100%;
+    }
+    .short{
+         width: auto;
+         padding-left: 20px;
+    }
+    .short:first-child{
+        padding-left: 0px;
+    }
+    #add-temptl .main-content .fields-div{
+        width: auto;
+        padding-left: 0px;
+    }
+    .layui-form-label{
+        width: auto!important;
+    }
+    .demo{
+        width: 100%;margin-top: -15px;
+    }
+    h6{
+        /*margin-left: 0.1rem;*/
+        margin-bottom: 5px;
+    }
+    h4{
+        font-weight: bold;
+    }
+    h4 span{
+        font-weight: normal;
+    }
+    .layui-tab-content{
+        padding-left: 20px;
+    }
+    .chang-color{
+        background-color: #2c3e50;
+        height: 1.8rem;
+        line-height: 1.8rem;
+        font-size: 12px!important;
+        display: inline-block;
+        margin-bottom: 0;
+        font-weight: normal;
+        text-align: center;
+        vertical-align: middle;
+        touch-action: manipulation;
+        cursor: pointer;
+        background-image: none;
+        border: 1px solid transparent;
+        white-space: nowrap;
+        padding: 6px 12px;
+        font-size: 12px;
+        line-height: 1.42857143;
+        border-radius: 3px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
+    .del-btn{
+        margin-top:20px;
+    }
+    .main-content-field{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    #main-content-field .short{
+         width: auto;
+         padding-left: 0px;
+         margin-top:10px;
+         width: 15%;
+         margin-right: 10px;
+    }
+
+    #main-content-field .short input{
+        height: 31px;
+    }
+    #main-content-field .short h6{
+        font-size: 13px;
+    }
+
+    ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+        font-size: 12px;
+        color:    #888;
+    }
+    :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+        font-size: 12px;
+        color:    #888;
+    }
+    ::-moz-placeholder { /* Mozilla Firefox 19+ */
+        font-size: 12px;
+        color:    #888;
+    }
+    :-ms-input-placeholder { /* Internet Explorer 10-11 */
+        font-size: 12px;
+        color:    #888;
+    }
+    #table-set{
+        display: none;
+    }
+</style>

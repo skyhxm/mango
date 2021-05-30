@@ -12,7 +12,7 @@ return [
     'default_method'     => 'GET',
     // 设置应用/版本（必须设置）
     'apps'               => [
-        ['title' => 'v1.0', 'path' => 'app\controller', 'folder' => 'v1'],
+        ['title' => 'v1.0', 'path' => 'app\api\controller', 'folder' => 'v1'],
     ],
     // 控制器分组
     'groups'             => [],

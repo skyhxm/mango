@@ -27,8 +27,6 @@ require.config({
         "okLayer": ["plugs/lay-module/okLayer/okLayer"],
         "okUtils": ["plugs/lay-module/okLayer/okUtils"],
         "okMock": ["plugs/lay-module/okLayer/okMock"],
-        "table": ["plugs/layui-v2.5.6/lay/modules/table"],
-        "form": ["plugs/layui-v2.5.6/lay/modules/form"],
         "inputmail": ["plugs/lay-module/okLayer/inputmail"],
     }
 });
@@ -44,8 +42,11 @@ window.PATH_CONFIG = PATH_CONFIG;
 // 初始化控制器对应的JS自动加载
 if ("undefined" != typeof CONFIG.AUTOLOAD_JS && CONFIG.AUTOLOAD_JS) {
     require([BASE_URL + CONFIG.CONTROLLER_JS_PATH], function (Controller) {
-        if (eval('Controller.' + CONFIG.ACTION)) {
-            eval('Controller.' + CONFIG.ACTION + '()');
+        console.log('Controller.' + CONFIG.ACTION)
+        if(CONFIG.ACTION){
+            if (eval('Controller.' + CONFIG.ACTION)) {
+                eval('Controller.' + CONFIG.ACTION + '()');
+            }
         }
     });
 }
