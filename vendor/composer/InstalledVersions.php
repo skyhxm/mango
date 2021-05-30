@@ -32,7 +32,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => 'de4264d814697e9683ffb129eb6f40a610fa8a97',
+    'reference' => '7653eab9cb42473b6212065e5cbe9a94083610ee',
     'name' => 'topthink/think',
   ),
   'versions' => 
@@ -48,12 +48,12 @@ private static $installed = array (
     ),
     'alibabacloud/client' => 
     array (
-      'pretty_version' => '1.5.30',
-      'version' => '1.5.30.0',
+      'pretty_version' => '1.5.31',
+      'version' => '1.5.31.0',
       'aliases' => 
       array (
       ),
-      'reference' => '1f497bb79835b84094318a70b672eb88260f2682',
+      'reference' => '19224d92fe27ab8ef501d77d4891e7660bc023c1',
     ),
     'aliyuncs/oss-sdk-php' => 
     array (
@@ -66,12 +66,12 @@ private static $installed = array (
     ),
     'clagiordano/weblibs-configmanager' => 
     array (
-      'pretty_version' => 'v1.1.0',
-      'version' => '1.1.0.0',
+      'pretty_version' => 'v1.4.0',
+      'version' => '1.4.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ecf584f5b3a27929175ff0abdba52f0131bef795',
+      'reference' => '8ff8bf195d0cbab9fe2ad3199c70920261300834',
     ),
     'danielstjules/stringy' => 
     array (
@@ -84,12 +84,12 @@ private static $installed = array (
     ),
     'doctrine/annotations' => 
     array (
-      'pretty_version' => '1.12.1',
-      'version' => '1.12.1.0',
+      'pretty_version' => '1.13.1',
+      'version' => '1.13.1.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'b17c5014ef81d212ac539f07a1001832df1b6d3b',
+      'reference' => 'e6e7b7d5b45a2f2abc5460cc6396480b2b1d321f',
     ),
     'doctrine/lexer' => 
     array (
@@ -166,12 +166,12 @@ private static $installed = array (
     ),
     'hg/apidoc' => 
     array (
-      'pretty_version' => 'v2.5.2',
-      'version' => '2.5.2.0',
+      'pretty_version' => 'v2.6.0',
+      'version' => '2.6.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'c36c77081a17586cc9ff873afd34dc6d78409dea',
+      'reference' => '9b033e5927fd15039478ae6ecb39eae826db0557',
     ),
     'jianyan74/php-excel' => 
     array (
@@ -220,21 +220,21 @@ private static $installed = array (
     ),
     'markbaker/complex' => 
     array (
-      'pretty_version' => '2.0.0',
-      'version' => '2.0.0.0',
+      'pretty_version' => '2.0.2',
+      'version' => '2.0.2.0',
       'aliases' => 
       array (
       ),
-      'reference' => '9999f1432fae467bc93c53f357105b4c31bb994c',
+      'reference' => 'd18272926d58065140314c01e18ec3dd7ae854ea',
     ),
     'markbaker/matrix' => 
     array (
-      'pretty_version' => '2.1.2',
-      'version' => '2.1.2.0',
+      'pretty_version' => '2.1.3',
+      'version' => '2.1.3.0',
       'aliases' => 
       array (
       ),
-      'reference' => '361c0f545c3172ee26c3d596a0aa03f0cef65e6a',
+      'reference' => '174395a901b5ba0925f1d790fa91bab531074b61',
     ),
     'mtdowling/jmespath.php' => 
     array (
@@ -335,12 +335,12 @@ private static $installed = array (
     ),
     'qcloud/cos-sdk-v5' => 
     array (
-      'pretty_version' => 'v2.1.5',
-      'version' => '2.1.5.0',
+      'pretty_version' => 'v2.2.0',
+      'version' => '2.2.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'ae23737a744e3809f55b270379ef6fb577f9065f',
+      'reference' => 'e67ad8143695192ee206bcbcafc78c08da92c621',
     ),
     'qiniu/php-sdk' => 
     array (
@@ -369,50 +369,59 @@ private static $installed = array (
       ),
       'reference' => 'e192d96b15fdd168bdb1c91001d26c93ba4af482',
     ),
-    'symfony/polyfill-intl-idn' => 
+    'symfony/polyfill-ctype' => 
     array (
-      'pretty_version' => 'v1.22.1',
-      'version' => '1.22.1.0',
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '2d63434d922daf7da8dd863e7907e67ee3031483',
+      'reference' => '46cd95797e9df938fdd2b03693b5fca5e64b01ce',
+    ),
+    'symfony/polyfill-intl-idn' => 
+    array (
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '65bd267525e82759e7d8c4e8ceea44f398838e65',
     ),
     'symfony/polyfill-intl-normalizer' => 
     array (
-      'pretty_version' => 'v1.22.1',
-      'version' => '1.22.1.0',
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '43a0283138253ed1d48d352ab6d0bdb3f809f248',
+      'reference' => '8590a5f561694770bdcd3f9b5c69dde6945028e8',
     ),
     'symfony/polyfill-mbstring' => 
     array (
-      'pretty_version' => 'v1.22.1',
-      'version' => '1.22.1.0',
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => '5232de97ee3b75b0360528dae24e73db49566ab1',
+      'reference' => '2df51500adbaebdc4c38dea4c89a2e131c45c8a1',
     ),
     'symfony/polyfill-php72' => 
     array (
-      'pretty_version' => 'v1.22.1',
-      'version' => '1.22.1.0',
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'cc6e6f9b39fe8075b3dabfbaf5b5f645ae1340c9',
+      'reference' => '9a142215a36a3888e30d0a9eeea9766764e96976',
     ),
     'symfony/polyfill-php80' => 
     array (
-      'pretty_version' => 'v1.22.1',
-      'version' => '1.22.1.0',
+      'pretty_version' => 'v1.23.0',
+      'version' => '1.23.0.0',
       'aliases' => 
       array (
       ),
-      'reference' => 'dc3063ba22c2a1fd2f45ed856374d79114998f91',
+      'reference' => 'eca0bf41ed421bed1b57c4958bab16aa86b757d0',
     ),
     'symfony/var-dumper' => 
     array (
@@ -422,6 +431,15 @@ private static $installed = array (
       array (
       ),
       'reference' => 'c194bcedde6295f3ec3e9eba1f5d484ea97c41a7',
+    ),
+    'symfony/yaml' => 
+    array (
+      'pretty_version' => 'v2.8.52',
+      'version' => '2.8.52.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => '02c1859112aa779d9ab394ae4f3381911d84052b',
     ),
     'topthink/framework' => 
     array (
@@ -439,7 +457,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => 'de4264d814697e9683ffb129eb6f40a610fa8a97',
+      'reference' => '7653eab9cb42473b6212065e5cbe9a94083610ee',
     ),
     'topthink/think-captcha' => 
     array (

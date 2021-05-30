@@ -12,6 +12,11 @@
 // [ 应用入口文件 ]
 namespace think;
 
+// 判断php版本
+if (PHP_VERSION < '7.2.0') {
+    exit('PHP version ">= 7.2.0". You are running ' . PHP_VERSION);
+}
+
 require __DIR__ . '/vendor/autoload.php';
 
 // 声明全局变量

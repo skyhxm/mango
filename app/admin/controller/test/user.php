@@ -4,7 +4,6 @@ namespace app\admin\controller\test;
 
 use app\common\controller\AdminController;
 use EasyAdmin\annotation\ControllerAnnotation;
-use EasyAdmin\annotation\NodeAnotation;
 use think\App;
 
 /**
@@ -20,8 +19,7 @@ class User extends AdminController
         parent::__construct($app);
 
         $this->model = new \app\admin\model\TestUser();
-        
+
     }
 
-    
 }
