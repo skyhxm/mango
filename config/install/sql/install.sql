@@ -214,7 +214,7 @@ CREATE TABLE `m_system_command` (
   `executetime` int unsigned DEFAULT NULL COMMENT '执行时间',
   `createtime` int unsigned DEFAULT NULL COMMENT '创建时间',
   `updatetime` int unsigned DEFAULT NULL COMMENT '更新时间',
-  `status` enum('successed','failured') CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'failured' COMMENT '状态',
+  `status` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL DEFAULT 'failured' COMMENT '状态',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=81 DEFAULT CHARSET=utf8 COMMENT='在线命令表';
 
