@@ -12,6 +12,11 @@ class TestUser extends TimeModel
     protected $deleteTime = false;
 
     
+    public function testUserPro()
+    {
+        return $this->belongsTo('\app\admin\model\TestUserPro', 'user_id', 'id');
+    }
+
     
 
 }

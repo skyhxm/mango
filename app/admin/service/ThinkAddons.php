@@ -22,6 +22,7 @@ use app\admin\model\Plugin;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use think\facade\App;
+use think\facade\Cache;
 use think\facade\Config;
 use think\facade\Db;
 
@@ -237,7 +238,6 @@ class ThinkAddons
     // 安装插件
     public function install(string $name)
     {
-        // dump($name);die;
         // 实例化插件
         $object = $this->getInstance($name);
         if ($object == false) {
@@ -282,6 +282,8 @@ class ThinkAddons
                 'msg'  => '插件实例化失败',
             ];
         }
+        //清除系统缓存
+        Cache::clear();
         return [
             'code' => 1,
             'msg'  => '插件安装成功',
@@ -314,6 +316,8 @@ class ThinkAddons
                 //删除插件表信息
                 //$delres = Plugin::where('name','=',$name)->delete();
                 //if($delres!==false){
+                //清除系统缓存
+                Cache::clear();
                 return [
                     'code' => 1,
                     'msg'  => '插件卸载成功',

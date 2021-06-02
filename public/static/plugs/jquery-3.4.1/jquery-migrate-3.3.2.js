@@ -7,7 +7,6 @@
 // See http://bugs.jquery.com/ticket/13335
 // "use strict";
 
-
 var warnedAbout = {};
 
 // List of warnings already given; public read only

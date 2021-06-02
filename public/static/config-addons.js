@@ -22,6 +22,9 @@ require.config({
         "autocomplete": ["plugs/lay-module/autocomplete/autocomplete"],
         "vue": ["plugs/vue-2.6.10/vue.min"],
         "ckeditor": ["plugs/ckeditor4/ckeditor"],
+        "okLayer": ["plugs/lay-module/okLayer/okLayer"],
+        "okUtils": ["plugs/lay-module/okLayer/okUtils"],
+        "okMock": ["plugs/lay-module/okLayer/okMock"],
     }
 });
 
