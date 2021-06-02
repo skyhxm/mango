@@ -14,3 +14,4 @@ app/test/
 /addons
 .svn
 *_bak
+/vendor
