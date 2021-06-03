@@ -10,7 +10,7 @@ use think\App;
 /**
  * @ControllerAnnotation(title="test_user")
  */
-class User extends AdminController
+class user extends AdminController
 {
 
     use \app\admin\traits\Curd;
@@ -19,7 +19,7 @@ class User extends AdminController
     {
         parent::__construct($app);
 
-        $this->model = new \app\admin\model\TestUser();
+        $this->model = new \app\admin\model\test\user();
         
     }
 

@@ -17,11 +17,6 @@ class user extends TimeModel
         return $this->belongsTo('\app\admin\model\TestUserPro', 'user_id', 'id');
     }
 
-    public function testUserPro2()
-    {
-        return $this->belongsTo('\app\admin\model\TestUserPro2', 'user_id', 'id');
-    }
-
     
 
 }
