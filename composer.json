@@ -39,8 +39,8 @@
         "psr-4": {
             "app\\": "app",
             "addons\\": "addons",
-            "EasyAdmin\\":"vendor/zhongshaofa/easy-admin/src",
-            "ServiceSwoole\\":"vendor/zhongshaofa/service-swoole/src"
+            "EasyAdmin\\":"extend/zhongshaofa/easy-admin/src",
+            "ServiceSwoole\\":"extend/zhongshaofa/service-swoole/src"
         },
         "psr-0": {
             "": "extend/"
