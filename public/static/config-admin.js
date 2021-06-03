@@ -1,10 +1,12 @@
 var BASE_URL = document.scripts[document.scripts.length - 1].src.substring(0, document.scripts[document.scripts.length - 1].src.lastIndexOf("/") + 1);
 window.BASE_URL = BASE_URL;
+// alert(BASE_URL)
 require.config({
     urlArgs: "v=" + CONFIG.VERSION,
     baseUrl: BASE_URL,
     paths: {
         "jquery": ["plugs/jquery-3.4.1/jquery-3.4.1.min"],
+        "jqueryMigrate": ["plugs/jquery-3.4.1/jquery-migrate-3.3.2"],
         "jquery-particleground": ["plugs/jq-module/jquery.particleground.min"],
         "echarts": ["plugs/echarts/echarts.min"],
         "echarts-theme": ["plugs/echarts/echarts-theme"],
@@ -22,6 +24,10 @@ require.config({
         "autocomplete": ["plugs/lay-module/autocomplete/autocomplete"],
         "vue": ["plugs/vue-2.6.10/vue.min"],
         "ckeditor": ["plugs/ckeditor4/ckeditor"],
+        "okLayer": ["plugs/lay-module/okLayer/okLayer"],
+        "okUtils": ["plugs/lay-module/okLayer/okUtils"],
+        "okMock": ["plugs/lay-module/okLayer/okMock"],
+        "inputmail": ["plugs/lay-module/okLayer/inputmail"],
     }
 });
 
@@ -31,11 +37,16 @@ var PATH_CONFIG = {
 };
 window.PATH_CONFIG = PATH_CONFIG;
 
+// console.log(11111111111111111111)
+// console.log(CONFIG.CONTROLLER_JS_PATH)
 // 初始化控制器对应的JS自动加载
 if ("undefined" != typeof CONFIG.AUTOLOAD_JS && CONFIG.AUTOLOAD_JS) {
     require([BASE_URL + CONFIG.CONTROLLER_JS_PATH], function (Controller) {
-        if (eval('Controller.' + CONFIG.ACTION)) {
-            eval('Controller.' + CONFIG.ACTION + '()');
+        // console.log('Controller.' + CONFIG.ACTION)
+        if(CONFIG.ACTION){
+            if (eval('Controller.' + CONFIG.ACTION)) {
+                eval('Controller.' + CONFIG.ACTION + '()');
+            }
         }
     });
 }

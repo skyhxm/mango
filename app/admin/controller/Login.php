@@ -5,14 +5,15 @@
 // +----------------------------------------------------------------------
 // | PHP交流群: 763822524
 // +----------------------------------------------------------------------
-// | 开源协议  https://mit-license.org 
+// | 开源协议  https://mit-license.org
 // +----------------------------------------------------------------------
 // | github开源项目：https://github.com/zhongshaofa/EasyAdmin
 // +----------------------------------------------------------------------
 
 namespace app\admin\controller;
 
-
+use addons\login_page\model\LoginPage;
+use app\admin\facade\ThinkAddons;
 use app\admin\model\SystemAdmin;
 use app\common\controller\AdminController;
 use think\captcha\facade\Captcha;
@@ -45,7 +46,7 @@ class Login extends AdminController
      */
     public function index()
     {
-        $captcha = Env::get('easyadmin.captcha', 1);
+        $captcha = Env::get('mango.captcha', 1);
         if ($this->request->isPost()) {
             $post = $this->request->post();
             $rule = [
@@ -75,7 +76,17 @@ class Login extends AdminController
         }
         $this->assign('captcha', $captcha);
         $this->assign('demo', $this->isDemo);
-        return $this->fetch();
+        //判断插件
+        $list      = ThinkAddons::localAddons();
+        $found_key = array_search('login_page', array_column($list, 'name'));
+        if (is_numeric($found_key)) {
+            $page_id = LoginPage::where('status', 1)->order('id', 'desc')->value('id');
+            if (!$page_id) {
+                $page_id = 1;
+            }
+            return $this->fetch('index' . $page_id);
+        }
+        return $this->fetch('index1');
     }
 
     /**

@@ -5,7 +5,7 @@
 // +----------------------------------------------------------------------
 // | PHP交流群: 763822524
 // +----------------------------------------------------------------------
-// | 开源协议  https://mit-license.org 
+// | 开源协议  https://mit-license.org
 // +----------------------------------------------------------------------
 // | github开源项目：https://github.com/zhongshaofa/EasyAdmin
 // +----------------------------------------------------------------------
@@ -59,17 +59,17 @@ class MenuService
     {
         /** @var AuthService $authService */
         $authServer = app(AuthService::class, ['adminId' => $this->adminId]);
-        return $this->buildMenuChild(0, $this->getMenuData(),$authServer);
+        return $this->buildMenuChild(0, $this->getMenuData(), $authServer);
     }
 
     private function buildMenuChild($pid, $menuList, AuthService $authServer)
     {
         $treeList = [];
         foreach ($menuList as &$v) {
-            $check = empty($v['href']) ? true : $authServer->checkNode($v['href']);
+            $check                           = empty($v['href']) ? true : $authServer->checkNode($v['href']);
             !empty($v['href']) && $v['href'] = __url($v['href']);
             if ($pid == $v['pid'] && $check) {
-                $node = $v;
+                $node  = $v;
                 $child = $this->buildMenuChild($v['id'], $menuList, $authServer);
                 if (!empty($child)) {
                     $node['child'] = $child;
@@ -99,7 +99,7 @@ class MenuService
                 ['pid', '<>', MenuConstant::HOME_PID],
             ])
             ->order([
-                'sort' => 'desc',
+                'sort' => 'asc',
                 'id'   => 'asc',
             ])
             ->select();

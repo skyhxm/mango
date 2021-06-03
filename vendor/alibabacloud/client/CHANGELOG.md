@@ -1,5 +1,48 @@
 # CHANGELOG
 
+## 1.5.31 - 2021-05-13
+
+- Deprecate `\GuzzleHttp\Psr7\parse_query` method
+
+## 1.5.30 - 2021-03-22
+- Fixed incompatibility in PHP 5.6 version.
+
+## 1.5.29 - 2020-08-03
+- Fixed RPC Signature.
+
+## 1.5.28 - 2020-08-03
+- Updated `endpoints`.
+
+## 1.5.27 - 2020-07-17
+- Fixed composer error config.
+
+## 1.5.26 - 2020-07-17
+- Validate RegionID/EndpointSuffix/Network.
+
+## 1.5.25 - 2020-07-04
+- Fixed ROA signature.
+- Deprecated `LogFormatter`.
+
+## 1.5.24 - 2020-06-04
+- Fixed Resolve Host.
+
+## 1.5.23 - 2020-05-22
+- Optimized global product support.
+
+## 1.5.22 - 2020-05-12
+- Updated Endpoints.
+
+## 1.5.21 - 2020-02-26
+- Improved Nonce.
+- Updated Endpoints.
+
+## 1.5.20 - 2019-12-30
+- Improved Docs.
+- Updated Endpoints.
+
+## 1.5.19 - 2019-12-17
+- Updated Endpoints.
+
 ## 1.5.18 - 2019-10-11
 - Updated Request link.
 - Updated Endpoints data.

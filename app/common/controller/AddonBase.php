@@ -42,7 +42,7 @@ class AddonBase extends AdminBase
 		if($info['install']!=1||$info['status']!=1){
 			echo "插件不可用";exit();
 		}
-		//var_dump($this->addon_path);
+		// var_dump($this->addon_path);
 		$this->view = clone View::engine('Think');
 		$this->view->config([
 			'view_path' => $this->addon_path . 'view' . DIRECTORY_SEPARATOR

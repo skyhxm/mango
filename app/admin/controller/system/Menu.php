@@ -5,7 +5,7 @@
 // +----------------------------------------------------------------------
 // | PHP交流群: 763822524
 // +----------------------------------------------------------------------
-// | 开源协议  https://mit-license.org 
+// | 开源协议  https://mit-license.org
 // +----------------------------------------------------------------------
 // | github开源项目：https://github.com/zhongshaofa/EasyAdmin
 // +----------------------------------------------------------------------
@@ -16,9 +16,9 @@ use app\admin\model\SystemMenu;
 use app\admin\model\SystemNode;
 use app\admin\service\TriggerService;
 use app\common\constants\MenuConstant;
+use app\common\controller\AdminController;
 use EasyAdmin\annotation\ControllerAnnotation;
 use EasyAdmin\annotation\NodeAnotation;
-use app\common\controller\AdminController;
 use think\App;
 
 /**
@@ -32,7 +32,7 @@ class Menu extends AdminController
     use \app\admin\traits\Curd;
 
     protected $sort = [
-        'sort' => 'desc',
+        'sort' => 'asc',
         'id'   => 'asc',
     ];
 
@@ -52,8 +52,8 @@ class Menu extends AdminController
                 return $this->selectList();
             }
             $count = $this->model->count();
-            $list = $this->model->order($this->sort)->select();
-            $data = [
+            $list  = $this->model->order($this->sort)->select();
+            $data  = [
                 'code'  => 0,
                 'msg'   => '',
                 'count' => $count,
@@ -144,6 +144,32 @@ class Menu extends AdminController
      */
     public function delete($id)
     {
+        if ($id == 1 || $id == 2) {
+            $this->error('无法删除');
+        }
+        $row = $this->model->whereIn('id', $id)->select();
+        empty($row) && $this->error('数据不存在');
+        try {
+            $save = $row->delete();
+        } catch (\Exception $e) {
+            $this->error('删除失败');
+        }
+        if ($save) {
+            TriggerService::updateMenu();
+            $this->success('删除成功');
+        } else {
+            $this->error('删除失败');
+        }
+    }
+
+    /**
+     * @NodeAnotation(title="删除")
+     */
+    public function del($id)
+    {
+        if (in_array(1, $id) || in_array(2, $id)) {
+            $this->error('无法删除');
+        }
         $row = $this->model->whereIn('id', $id)->select();
         empty($row) && $this->error('数据不存在');
         try {

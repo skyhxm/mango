@@ -11,3 +11,7 @@ public/WowOss.exe
 app/index/controller/Test.php
 composer.phar
 app/test/
+/addons
+.svn
+*_bak
+/vendor

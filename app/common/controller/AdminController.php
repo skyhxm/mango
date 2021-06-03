@@ -5,14 +5,12 @@
 // +----------------------------------------------------------------------
 // | PHP交流群: 763822524
 // +----------------------------------------------------------------------
-// | 开源协议  https://mit-license.org 
+// | 开源协议  https://mit-license.org
 // +----------------------------------------------------------------------
 // | github开源项目：https://github.com/zhongshaofa/EasyAdmin
 // +----------------------------------------------------------------------
 
-
 namespace app\common\controller;
-
 
 use app\BaseController;
 use EasyAdmin\tool\CommonTool;
@@ -86,7 +84,6 @@ class AdminController extends BaseController
      */
     protected $isDemo = false;
 
-
     /**
      * 初始化方法
      */
@@ -94,7 +91,7 @@ class AdminController extends BaseController
     {
         parent::initialize();
         $this->layout && $this->app->view->engine()->layout($this->layout);
-        $this->isDemo = Env::get('easyadmin.is_demo', false);
+        $this->isDemo = Env::get('mango.is_demo', false);
     }
 
     /**
@@ -144,15 +141,15 @@ class AdminController extends BaseController
      */
     protected function buildTableParames($excludeFields = [])
     {
-        $get = $this->request->get('', null, null);
-        $page = isset($get['page']) && !empty($get['page']) ? $get['page'] : 1;
-        $limit = isset($get['limit']) && !empty($get['limit']) ? $get['limit'] : 15;
+        $get     = $this->request->get('', null, null);
+        $page    = isset($get['page']) && !empty($get['page']) ? $get['page'] : 1;
+        $limit   = isset($get['limit']) && !empty($get['limit']) ? $get['limit'] : 15;
         $filters = isset($get['filter']) && !empty($get['filter']) ? $get['filter'] : '{}';
-        $ops = isset($get['op']) && !empty($get['op']) ? $get['op'] : '{}';
+        $ops     = isset($get['op']) && !empty($get['op']) ? $get['op'] : '{}';
         // json转数组
-        $filters = json_decode($filters, true);
-        $ops = json_decode($ops, true);
-        $where = [];
+        $filters  = json_decode($filters, true);
+        $ops      = json_decode($ops, true);
+        $where    = [];
         $excludes = [];
 
         // 判断是否关联查询
@@ -182,8 +179,8 @@ class AdminController extends BaseController
                     break;
                 case 'range':
                     [$beginTime, $endTime] = explode(' - ', $val);
-                    $where[] = [$key, '>=', strtotime($beginTime)];
-                    $where[] = [$key, '<=', strtotime($endTime)];
+                    $where[]               = [$key, '>=', strtotime($beginTime)];
+                    $where[]               = [$key, '<=', strtotime($endTime)];
                     break;
                 default:
                     $where[] = [$key, $op, "%{$val}"];
@@ -199,7 +196,7 @@ class AdminController extends BaseController
     public function selectList()
     {
         $fields = input('selectFields');
-        $data = $this->model
+        $data   = $this->model
             ->where($this->selectWhere)
             ->field($fields)
             ->select();

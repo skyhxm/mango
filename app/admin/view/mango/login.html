@@ -1,179 +1,122 @@
-
-	<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
+
 <head>
-	<meta charset="UTF-8">
-	<title>草莓系统登录</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<link rel="stylesheet" href="/static/css/oksub.css">
-	<script type="text/javascript" src="/static/lib/loading/okLoading.js"></script>
-	<style>
-		.layui-upload-list img{
+    <meta charset="UTF-8">
+    <title>芒果系统登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__STATIC__/plugs/lay-module/okLayer/oksub.css">
+    <link rel="stylesheet" href="__STATIC__/plugs/lay-module/okLayer/oksub.css">
+    <link rel="stylesheet" href="__STATIC__/plugs/lay-module/okLayer/layui.css">
+    <style>
+        .layui-upload-list img{
 			height:100px;
 			width:100px;
 		}
+        .send{
+            background: #28bcf9;
+            width: 68px;
+            height: 100%;
+            float: right;
+            margin-top: -38px;
+            border-radius: 3px;
+            font-size: 14px;
+            line-height: 38px;
+            color: #fff;
+            text-align: center;
+        }
+        .on_changes{width:232px; position:absolute; top:40px; list-style:none; background:#FFF; border:1px solid #000; display:none; padding:10px;z-index: 100}
+        .on_changes li{margin:8px;padding:4px;}
+        .on_changes li.active{ background:#CEE7FF;}
+        .on_changes li:hover{
+            cursor:default;
+        }
+        .send:hover{
+            cursor:default;
+        }
+        .disable {
+            pointer-events: none;
+        }
 	</style>
 </head>
+
 <body>
-<div class="ok-body" id="denglu">
-	<!--form表单-->
-	<form class="layui-form layui-form-pane ok-form">
-
-        <div class="layui-form-item">
-			<label class="layui-form-label">用户名</label>
-			<div class="layui-input-block">
-				<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input"
-					   lay-verify="required">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">密码</label>
-			<div class="layui-input-block">
-				<input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input"
-				       lay-verify="required">
-			</div>
-		</div>
-		
-		<div class="layui-form-item">
-			<div class="layui-input-block">
-				<button class="layui-btn" lay-submit lay-filter="add">立即登录</button>
-				<button type="reset" class="layui-btn layui-btn-primary" id="quzhuce">没账户去注册</button>
-			</div>
-		</div>
-	</form>
-</div>
-
-
-<!-- 注册 -->
-<div class="ok-body" id="zhuce" style="display: none;">
-	<!--form表单-->
-	<form class="layui-form layui-form-pane ok-form">
-
-        <div class="layui-form-item">
-			<label class="layui-form-label">用户名</label>
-			<div class="layui-input-block">
-				<input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input"
-					   lay-verify="required">
-			</div>
-		</div>
-		<div class="layui-form-item">
-			<label class="layui-form-label">密码</label>
-			<div class="layui-input-block">
-				<input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input"
-				       lay-verify="required">
-			</div>
-		</div>
-		
-		<div class="layui-form-item">
-			<div class="layui-input-block">
-				<button class="layui-btn layui-btn-primary" lay-submit id="qudenglu">有账户去登录</button>
-				<button lay-submit lay-filter="reg" class="layui-btn">立即注册</button>
-			</div>
-		</div>
-	</form>
-</div>
-
-
-<!--js逻辑-->
-<script src="/static/lib/layui/layui.js"></script>
-<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-<script>
-	$("#quzhuce").click(function(){
-		$("#zhuce").show(100);
-		$("#denglu").hide(100);
-	});
-
-	$("#qudenglu").click(function(){
-		$("#zhuce").hide(100);
-		$("#denglu").show(100);
-	});
-
-</script>
-<script>
-	
-	layui.use(["element", "form", "laydate", "okLayer", "okUtils"], function () {
-		let form = layui.form;
-		let laydate = layui.laydate;
-		let okLayer = layui.okLayer;
-		let okUtils = layui.okUtils;
-
-		okLoading.close();
-
-		//laydate.render({elem: "#birthday", type: "datetime"});
-
-		form.verify({
-			
-		});
-
-		form.on("submit(add)", function (data) {
-			okUtils.ajax("http://stapi.shiliucrm.com/api/user/login", "post", data.field, true).done(function (response) {
-				//console.log(response);
-				if(response.code==1){
-					okLayer.greenTickMsg("登录成功", function () {
-
-						const Storage = {};
-						Storage.get = function(name) {
-							return localStorage.getItem(name);
-						}
-
-						Storage.set = function(name, val) {
-							localStorage.setItem(name, val);
-						}
-
-						Storage.set("caomeiadmin_userinfo", response.data.token);
-      					console.log(Storage.get("caomeiadmin_userinfo"));
-
-						parent.layer.close(parent.layer.getFrameIndex(window.name));
-					});
-				}else{
-					okLayer.redCrossMsg(response.msg, function () {
-				        
-				    })
-				}
-				
-			}).fail(function (error) {
-				console.log(error)
-			});
-			return false;
-		});
-
-
-		//注册
-		form.on("submit(reg)", function (data) {
-			okUtils.ajax("http://stapi.shiliucrm.com/api/user/reg", "post", data.field, true).done(function (response) {
-				//console.log(response);
-				if(response.code==1){
-					okLayer.greenTickMsg("注册成功", function () {
-
-						const Storage = {};
-						Storage.get = function(name) {
-							return localStorage.getItem(name);
-						}
-
-						Storage.set = function(name, val) {
-							localStorage.setItem(name, val);
-						}
-
-						Storage.set("caomeiadmin_userinfo", response.data.token);
-      					console.log(Storage.get("caomeiadmin_userinfo"));
-
-						parent.layer.close(parent.layer.getFrameIndex(window.name));
-					});
-				}else{
-					okLayer.redCrossMsg(response.msg, function () {
-				        
-				    })
-				}
-				
-			}).fail(function (error) {
-				console.log(error)
-			});
-			return false;
-		});
-
-
-	});
-</script>
-
+    <div class="ok-body" id="denglu">
+        <!--form表单-->
+        <form class="layui-form layui-form-pane ok-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="mail" name='account' placeholder="请输入邮箱" autocomplete="off" class="layui-input email" lay-verify="required">
+                    <ul class="on_changes">
+                        <li email="">请选择邮箱类型</li>
+                        <li email=""></li>
+                        <li email="@sina.com"></li>
+                        <li email="@163.com"></li>
+                        <li email="@qq.com"></li>
+                        <li email="@hotmail.com"></li>
+                        <li email="@126.com"></li>
+                        <li email="@gmail.com"></li>
+                        <li email="@yahoo.com"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="add">立即登录</button>
+                    <button type="reset" class="layui-btn layui-btn-primary" id="quzhuce">没账户去注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 注册 -->
+    <div class="ok-body" id="zhuce" style="display: none;">
+        <!--form表单-->
+        <form class="layui-form layui-form-pane ok-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="mail" name='email' placeholder="请输入邮箱" autocomplete="off" class="layui-input email" lay-verify="required" id="email">
+                    <ul class="on_changes">
+                        <li email="">请选择邮箱类型</li>
+                        <li email=""></li>
+                        <li email="@sina.com"></li>
+                        <li email="@163.com"></li>
+                        <li email="@qq.com"></li>
+                        <li email="@hotmail.com"></li>
+                        <li email="@126.com"></li>
+                        <li email="@gmail.com"></li>
+                        <li email="@yahoo.com"></li>
+                    </ul>
+                    <div class="send">发送</div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">验证码</label>
+                <div class="layui-input-block">
+                    <input type="text" id="code" name='code' placeholder="请输入验证码" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-primary" lay-submit id="qudenglu">有账户去登录</button>
+                    <button lay-submit lay-filter="reg" class="layui-btn">立即注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
 </body>
+
 </html>

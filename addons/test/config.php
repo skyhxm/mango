@@ -5,7 +5,7 @@ return array (
   array (
     'title' => '文本框:',
     'type' => 'text',
-    'value' => '1302274444222',
+    'value' => '1212',
   ),
   'danxuan' => 
   array (
@@ -16,7 +16,7 @@ return array (
       1 => '显示',
       0 => '不显示',
     ),
-    'value' => '0',
+    'value' => '1',
   ),
   'duoxuan' => 
   array (
@@ -29,7 +29,7 @@ return array (
       3 => 'C',
       4 => 'D',
     ),
-    'value' => '1,2,4',
+    'value' => '1,2,3,4',
   ),
   'xuanzekuang' => 
   array (

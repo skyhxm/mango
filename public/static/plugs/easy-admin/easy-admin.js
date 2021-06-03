@@ -469,7 +469,9 @@ define(["jquery", "tableSelect", "ckeditor"], function ($, tableSelect, undefine
                 return html;
             },
             toolSpliceUrl(url, field, data) {
-                url = url.indexOf("?") !== -1 ? url + '&' + field + '=' + data[field] : url + '?' + field + '=' + data[field];
+                if(url){
+                    url = url.indexOf("?") !== -1 ? url + '&' + field + '=' + data[field] : url + '?' + field + '=' + data[field];
+                }
                 return url;
             },
             formatCols: function (cols, init) {

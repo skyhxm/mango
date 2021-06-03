@@ -18,19 +18,19 @@ class Menu
     {
         if (!is_numeric($parent)) {
             $parentRule = SystemMenu::getByHref($parent);
-            $pid = $parentRule ? $parentRule['id'] : 0;
+            $pid        = $parentRule ? $parentRule['id'] : 0;
         } else {
             $pid = $parent;
         }
-        $allow = array_flip(['file', 'href', 'title', 'icon', 'condition', 'remark', 'ismenu','weigh']);
+        $allow = array_flip(['name', 'file', 'href', 'title', 'icon', 'condition', 'remark', 'ismenu', 'weigh']);
         foreach ($menu as $k => $v) {
             $hasChild = isset($v['sublist']) && $v['sublist'] ? true : false;
 
             $data = array_intersect_key($v, $allow);
 
             $data['ismenu'] = isset($data['ismenu']) ? $data['ismenu'] : ($hasChild ? 1 : 0);
-            $data['icon'] = isset($data['icon']) ? $data['icon'] : ($hasChild ? 'fa-list' : '');
-            $data['pid'] = $pid;
+            $data['icon']   = isset($data['icon']) ? $data['icon'] : ($hasChild ? 'fa-list' : '');
+            $data['pid']    = $pid;
             $data['status'] = '1';
             try {
                 $menu = SystemMenu::create($data);
@@ -51,6 +51,8 @@ class Menu
     public static function delete($name)
     {
         $ids = self::getSystemMenuIdsByName($name);
+
+        //dd($ids);
         if (!$ids) {
             return false;
         }
@@ -100,7 +102,7 @@ class Menu
             return [];
         }
         $menuList = [];
-        $menu = SystemMenu::getByHref($name);
+        $menu     = SystemMenu::getByHref($name);
         if ($menu) {
             $ruleList = collection(SystemMenu::where('id', 'in', $ids)->select())->toArray();
             $menuList = Tree::instance()->init($ruleList)->getTreeArray($menu['id']);
@@ -115,16 +117,29 @@ class Menu
      */
     public static function getSystemMenuIdsByName($name)
     {
-        $ids = [];
-        $menu = SystemMenu::getByHref($name);
+        $res  = [];
+        $ids  = [];
+        $menu = SystemMenu::where('name', $name)->select();
+        // dump($menu);
         if ($menu) {
             // 必须将结果集转换为数组
             $ruleList = SystemMenu::order('sort', 'desc')->field('id,pid,href')->select()->toArray();
-            
+
             // 构造菜单数据
-            $ids = Tree::instance()->init($ruleList)->getChildrenIds($menu['id'], true);
+            foreach ($menu as $key => $value) {
+                $res[] = Tree::instance()->init($ruleList)->getChildrenIds($value['id'], true);
+            }
+            // dd($res);
+            if ($res) {
+                foreach ($res as $key => $value) {
+                    foreach ($value as $ke => $val) {
+                        $ids[] = $val;
+                    }
+                }
+            }
+
         }
-       
+
         return $ids;
     }
 
