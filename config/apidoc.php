@@ -7,17 +7,20 @@ return [
     // 版权申明
     'copyright'          => 'Powered By hg-code',
     // 默认作者
-    'default_author'     => '',
+    'default_author'     => 'mango',
     // 默认请求类型
-    'default_method'     => 'GET',
+    'default_method'     => 'POST',
     // 设置应用/版本（必须设置）
     'apps'               => [
         ['title' => 'v1.0', 'path' => 'app\api\controller', 'folder' => 'v1'],
     ],
     // 控制器分组
-    'groups'             => [],
+    'groups'             => [
+        ['title' => '基础模块', 'name' => 'base'],
+        ['title' => 'API', 'name' => 'api'],
+    ],
     // 指定公共注释定义的文件地址
-    'definitions'        => "app\controller\Definitions",
+    'definitions'        => "app\api\common\controller\Definitions",
     //指定生成文档的控制器
     'controllers'        => [],
     // 过滤，不解析的控制器
