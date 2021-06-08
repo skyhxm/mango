@@ -9,9 +9,12 @@ class Definitions
 {
     /**
      * 获取分页数据列表的参数
-     * @Param("pageIndex",type="int",require=true,default="0",desc="查询页数")
-     * @Param("pageSize",type="int",require=true,default="20",desc="查询条数")
+     * @Param("page",type="int",require=true,default="1",desc="查询页数")
+     * @Param("limit",type="int",require=true,default="10",desc="查询条数")
      * @Returned("total", type="int", desc="总条数")
+     * @Returned("per_page", type="int", desc="上一页数")
+     * @Returned("current_page", type="int", desc="当前页数")
+     * @Returned("last_page", type="int", desc="总页数")
      */
     public function pagingParam()
     {}

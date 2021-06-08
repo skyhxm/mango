@@ -52,7 +52,8 @@ return [
     // 统一的请求响应体，仅显示在文档提示中
     'responses'          => [
         ['name' => 'code', 'desc' => '状态码', 'type' => 'int'],
-        ['name' => 'message', 'desc' => '操作描述', 'type' => 'string'],
+        ['name' => 'msg', 'desc' => '操作描述', 'type' => 'string'],
+        ['name' => 'time', 'desc' => '时间', 'type' => 'string'],
         ['name' => 'data', 'desc' => '业务数据', 'main' => true, 'type' => 'object'],
     ],
     // md文档
