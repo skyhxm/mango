@@ -1,0 +1,182 @@
+
+	<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>草莓系统支付</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+	<link rel="stylesheet" href="/static/css/oksub.css">
+	<script type="text/javascript" src="/static/lib/loading/okLoading.js"></script>
+	<style>
+		.layui-upload-list img{
+			height:100px;
+			width:100px;
+		}
+	</style>
+</head>
+<body>
+<!-- <div class="ok-body" style="text-align: center;">
+	<img src="{$img}"/> 
+</div> -->
+
+<div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+	<ul class="layui-tab-title">
+		<li class="layui-this">微信支付</li>
+		<li>支付宝支付</li>
+	</ul>
+	<div class="layui-tab-content">
+		<div class="layui-tab-item layui-show">
+			<img src="{$img}"/> 
+		</div>
+		<div class="layui-tab-item"><img src="" id="zfberweima"/> </div>
+	</div>
+</div>      
+
+
+<!--js逻辑-->
+<script src="/static/lib/layui/layui.js"></script>
+<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+
+<script>
+	
+	layui.use(["element", "form", "laydate", "okLayer", "okUtils"], function () {
+		let form = layui.form;
+		let laydate = layui.laydate;
+		let okLayer = layui.okLayer;
+		let okUtils = layui.okUtils;
+		var $ = jQuery = layui.jquery;
+		var element = layui.element;
+
+		okLoading.close();
+
+		//laydate.render({elem: "#birthday", type: "datetime"});
+
+		form.verify({
+			
+		});
+
+		getorder({$order_sn})
+
+		 //一些事件监听
+		 element.on('tab(docDemoTabBrief)', function(data){
+            // console.log(data.index); //得到当前Tab的所在下标
+            if (data.index == 0) {
+                console.log('微信支付');
+                // searchCon(pageNum, pageSize,gradeId,subjectId);
+                window.clearInterval(paydsq);
+				getorder({$order_sn})
+            }else if(data.index == 1){
+                console.log('支付宝支付');
+				
+				const Storage = {};
+				Storage.get = function(name) {
+					return localStorage.getItem(name);
+				}
+				var caomei_tokeny = Storage.get("caomeiadmin_userinfo");
+
+				$.ajax({
+					url: 'http://stapi.shiliucrm.com/api/plug/xiazai',
+					type: 'post',
+					// 设置的是请求参数
+					data: {name: '{$name}',token: caomei_tokeny,pay_type:'2'},
+					// 用于设置响应体的类型 注意 跟 data 参数没关系！！！
+					dataType: 'json',
+					success: function (res) {
+						// 一旦设置的 dataType 选项，就不再关心 服务端 响应的 Content-Type 了
+						// 客户端会主观认为服务端返回的就是 JSON 格式的字符串
+						console.log(res)
+
+						if(res.code == '-5'){
+							window.clearInterval(paydsq);
+							getorder(res.data.order_sn)
+							$("#zfberweima").attr('src',res.data.img);
+						}else{
+							okLayer.redCrossMsg(res.msg, function () {
+								
+							})
+						}
+					}
+				})
+            }
+        });
+
+		// $('.layui-tab-title').on('click', function(title) {
+		// 	if(title.toElement.textContent=="微信支付"){
+		// 		console.log('微信支付')
+		// 		window.clearInterval(paydsq);
+		// 		getorder({$order_sn})
+		// 	}else if(title.toElement.textContent=="支付宝支付"){
+		// 		console.log('支付宝支付')
+
+		// 		const Storage = {};
+		// 		Storage.get = function(name) {
+		// 			return localStorage.getItem(name);
+		// 		}
+		// 		var caomei_tokeny = Storage.get("caomeiadmin_userinfo");
+
+		// 		$.ajax({
+		// 			url: 'http://stapi.shiliucrm.com/api/plug/xiazai',
+		// 			type: 'post',
+		// 			// 设置的是请求参数
+		// 			data: {name: '{$name}',token: caomei_tokeny,pay_type:'2'},
+		// 			// 用于设置响应体的类型 注意 跟 data 参数没关系！！！
+		// 			dataType: 'json',
+		// 			success: function (res) {
+		// 				// 一旦设置的 dataType 选项，就不再关心 服务端 响应的 Content-Type 了
+		// 				// 客户端会主观认为服务端返回的就是 JSON 格式的字符串
+		// 				console.log(res)
+
+		// 				if(res.code == '-5'){
+		// 					window.clearInterval(paydsq);
+		// 					getorder(res.data.order_sn)
+		// 					$("#zfberweima").attr('src',res.data.img);
+		// 				}else{
+		// 					okLayer.redCrossMsg(res.msg, function () {
+								
+		// 					})
+		// 				}
+		// 			}
+		// 		})
+
+		// 	}
+		// });
+
+		function getorder(order_sn)
+		{
+			paydsq = setInterval(function () { //每5秒刷新一次图表
+				//需要执行的代码写在这里
+
+				$.ajax({
+					url: 'http://stapi.shiliucrm.com/api/plug/jcpan',
+					type: 'post',
+					// 设置的是请求参数
+					data: {order_sn:order_sn},
+					// 用于设置响应体的类型 注意 跟 data 参数没关系！！！
+					dataType: 'json',
+					success: function (res) {
+						// 一旦设置的 dataType 选项，就不再关心 服务端 响应的 Content-Type 了
+						// 客户端会主观认为服务端返回的就是 JSON 格式的字符串
+						console.log(res)
+
+						if(res.code == 1){
+							okLayer.greenTickMsg("支付成功，页面刷新后点击安装继续", function () {
+
+								parent.layer.close(parent.layer.getFrameIndex(window.name));
+							});
+						}else{
+							// okLayer.redCrossMsg(res.msg, function () {
+								
+							// })
+						}
+					}
+				})
+					
+			}, 3000); 
+		}
+		
+
+	});
+</script>
+
+</body>
+</html>

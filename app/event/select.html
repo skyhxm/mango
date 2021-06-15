@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="layui/css/layui.css"/>
+		<style>body{padding:20px;}.multi dl dd.layui-this{background-color:#fff}</style>
+	</head>
+	<body>
+		<form class="layui-form layui-form-pane" action="">
+			<div class="layui-form-item">
+				<label class="layui-form-label">多选</label>
+				<div class="layui-input-block">
+					<select multiple="multiple" lay-filter="test">
+						<option value=""></option>
+						<option value="0" selected>写作</option>
+						<option value="1">阅读</option>
+						<option value="2">游戏</option>
+						<option value="3" selected>音乐</option>
+						<option value="4">旅行</option>
+					</select>
+				</div>
+			</div>
+			<div class="layui-form-item">
+				<label class="layui-form-label">单选</label>
+				<div class="layui-input-block">
+					<select>
+						<option value=""></option>
+						<option value="0">写作</option>
+						<option value="1" selected>阅读</option>
+						<option value="2">游戏</option>
+						<option value="3" selected>音乐</option>
+						<option value="4">旅行</option>
+					</select>
+				</div>
+			</div>
+			
+			<button type="button" class="layui-btn layui-btn-normal" id="get-val">获取选中值</button>
+		</form>
+		<script type="text/javascript" src="layui/layui.js"></script>
+		<script type="text/javascript">
+			layui.config({
+				base: 'js/',
+			})
+			layui.use(['multiSelect'],function() {
+				var $ = layui.jquery,form = layui.form,multiSelect = layui.multiSelect;
+				$('#get-val').click(function() {
+					var vals = [],
+						texts = [];
+					$('select[multiple] option:selected').each(function() {
+						vals.push($(this).val());
+						texts.push($(this).text());
+					})
+					console.dir(vals);
+					console.dir(texts);
+				})
+				form.on('select(test)',function(data){
+					console.dir(data);
+				})
+			});
+		</script>
+	</body>
+</html>

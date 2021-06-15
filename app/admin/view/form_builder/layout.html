@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>添加用户</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__STATIC__/plugs/lay-module/okLayer/oksub.css">
+	<style>
+		.layui-upload-list img{
+			height:100px;
+			width:100px;
+		}
+        layui-form-label{
+            width: 200px!important;
+        }
+        .layui-input{
+            width: 400px!important;
+        }
+        .layui-textarea{
+            width: 400px!important;
+        }
+	</style>
+</head>
+<body>
+<!--内容开始-->
+<section class="content">
+   
+    <!--数据表开始-->
+    <form class="layui-form layui-form-pane ok-form" name="form-builder" method="{$form_method}" action="{$form_url}" {$submit_confirm ?= 'submit_confirm'} id="plugs_action">
+        <!---->
+        {if $form_items}
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <div class="box box-body">
+                    <!---->
+                    {volist name="form_items" id="form"}
+                    {switch form.type}
+                    	{case value="hidden"}
+                            {// 隐藏域 }
+                            {include file="form_builder/items/hidden" type='' /}
+                        {/case}
+                        {case text}
+                        	{// 单行文本框 }
+                        	{include file="form_builder/items/text" type='' /}
+                        {/case}
+                        {case value="textarea"}
+                            {// 多行文本框 }
+                            {include file="form_builder/items/textarea" type='' /}
+                        {/case}
+                        {case value="radio"}
+                            {// 单选 }
+                            {include file="form_builder/items/radio" type='' /}
+                        {/case}
+                        {case value="checkbox"}
+                            {// 多选 }
+                            {include file="form_builder/items/checkbox" type='' /}
+                        {/case}
+                        
+                        {case value="select"}
+                            {// 下拉菜单 }
+                            {include file="form_builder/items/select" type='' /}
+                        {/case}
+                        
+
+                        {default /}
+
+                    {/switch}
+                    {/volist}
+                    <!---->
+                    <div class="layui-form-item">
+                            <div class="layui-input-block">
+                            	{php}if(isset($btn_hide) && !in_array('submit', $btn_hide)):{/php}
+                                <button class="layui-btn " lay-submit lay-filter="add">{$btn_title['submit']|default='提 交'}</button>
+                                {php}endif;{/php}
+                                {php}if(isset($btn_hide) && !in_array('back', $btn_hide)):{/php}
+                               
+                                {php}endif;{/php}
+                                {// 额外按钮}
+                                {foreach $btn_extra as $key=>$vo }
+                                {$vo|raw|default=''}
+                                {/foreach}
+                            </div>
+                    </div>
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        {else /}
+        <div class="row">
+            <div class="col-sm-12 col-xs-12">
+                <div class="box box-body">
+                    {$empty_tips|raw}
+                </div>
+                <!-- /.box -->
+            </div>
+        </div>
+        {/if}
+    </form>
+    
+</section>
+<!--内容结束-->
+<!--js逻辑-->
+<script src="__STATIC__/plugs/layui-v2.5.6/layui.all.js?v={$version}" charset="utf-8"></script>
+<script src="__STATIC__/plugs/require-2.3.6/require.js?v={$version}" charset="utf-8"></script>
+<script src="__STATIC__/config-admin.js?v={$version}" charset="utf-8"></script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>插件列表</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__STATIC__/plugs/lay-module/okLayer/oksub.css">
+</head>
+
+<body>
+    <div class="ok-body">
+        <!--模糊搜索区域-->
+        <!--数据表格-->
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">全部插件</li>
+                <li class="">本地插件</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-table-tool" style="line-height: 45px;">
+                    <div class="layui-table-tool-temp">
+                        <button class="layui-btn layui-btn-sm layuimini-btn-primary refresh"><i class="fa fa-refresh"></i>
+                        </button>
+                        <button class="layui-btn layui-btn-normal layui-btn-sm get-user" data-open="" data-title="会员信息"><i class="fa fa-user"></i> 会员信息</button>
+                    </div>
+                </div>
+                <div class="layui-tab-item layui-show">
+                    <table class="layui-hide" id="tableId" lay-filter="tableFilter"></table>
+                </div>
+                <div class="layui-tab-item">
+                    <table class="layui-hide" id="tableIdbd" lay-filter="tableFilter"></table>
+                </div>
+            </div>
+        </div>
+
+        <!-- 头工具栏模板 -->
+        <script type="text/html" id="toolbarTpl">
+            <div class="layui-btn-container">
+		
+	</div>
+</script>
+        <!-- 行工具栏模板 -->
+        <script type="text/html" id="statusTpl">
+            {{#  if(d.status == 1){ }}
+	<span class="layui-btn layui-btn-normal layui-btn-xs">启用</span>
+	{{#  } else if(d.status != 1) { }}
+	<span class="layui-btn layui-btn-warm layui-btn-xs">停用</span>
+	{{#  } }}
+</script>
+</body>
+
+</html>

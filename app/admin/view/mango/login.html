@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>芒果系统登录</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" href="__STATIC__/plugs/lay-module/okLayer/oksub.css">
+    <link rel="stylesheet" href="__STATIC__/plugs/lay-module/okLayer/oksub.css">
+    <link rel="stylesheet" href="__STATIC__/plugs/lay-module/okLayer/layui.css">
+    <style>
+        .layui-upload-list img{
+			height:100px;
+			width:100px;
+		}
+        .send{
+            background: #28bcf9;
+            width: 68px;
+            height: 100%;
+            float: right;
+            margin-top: -38px;
+            border-radius: 3px;
+            font-size: 14px;
+            line-height: 38px;
+            color: #fff;
+            text-align: center;
+        }
+        .on_changes{width:232px; position:absolute; top:40px; list-style:none; background:#FFF; border:1px solid #000; display:none; padding:10px;z-index: 100}
+        .on_changes li{margin:8px;padding:4px;}
+        .on_changes li.active{ background:#CEE7FF;}
+        .on_changes li:hover{
+            cursor:default;
+        }
+        .send:hover{
+            cursor:default;
+        }
+        .disable {
+            pointer-events: none;
+        }
+	</style>
+</head>
+
+<body>
+    <div class="ok-body" id="denglu">
+        <!--form表单-->
+        <form class="layui-form layui-form-pane ok-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="mail" name='account' placeholder="请输入邮箱" autocomplete="off" class="layui-input email" lay-verify="required">
+                    <ul class="on_changes">
+                        <li email="">请选择邮箱类型</li>
+                        <li email=""></li>
+                        <li email="@sina.com"></li>
+                        <li email="@163.com"></li>
+                        <li email="@qq.com"></li>
+                        <li email="@hotmail.com"></li>
+                        <li email="@126.com"></li>
+                        <li email="@gmail.com"></li>
+                        <li email="@yahoo.com"></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="add">立即登录</button>
+                    <button type="reset" class="layui-btn layui-btn-primary" id="quzhuce">没账户去注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 注册 -->
+    <div class="ok-body" id="zhuce" style="display: none;">
+        <!--form表单-->
+        <form class="layui-form layui-form-pane ok-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">邮箱</label>
+                <div class="layui-input-block">
+                    <input type="mail" name='email' placeholder="请输入邮箱" autocomplete="off" class="layui-input email" lay-verify="required" id="email">
+                    <ul class="on_changes">
+                        <li email="">请选择邮箱类型</li>
+                        <li email=""></li>
+                        <li email="@sina.com"></li>
+                        <li email="@163.com"></li>
+                        <li email="@qq.com"></li>
+                        <li email="@hotmail.com"></li>
+                        <li email="@126.com"></li>
+                        <li email="@gmail.com"></li>
+                        <li email="@yahoo.com"></li>
+                    </ul>
+                    <div class="send">发送</div>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">验证码</label>
+                <div class="layui-input-block">
+                    <input type="text" id="code" name='code' placeholder="请输入验证码" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">密码</label>
+                <div class="layui-input-block">
+                    <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input" lay-verify="required">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn layui-btn-primary" lay-submit id="qudenglu">有账户去登录</button>
+                    <button lay-submit lay-filter="reg" class="layui-btn">立即注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
