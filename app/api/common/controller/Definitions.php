@@ -30,10 +30,6 @@ class Definitions
 
     /**
      * @Header("token",type="string",require=true,desc="身份票据")
-<<<<<<< HEAD
-=======
-     * @Header("shopid",type="string",require=true,desc="店铺id")
->>>>>>> a45c881b3f81953d04d8835ae8f7848ae0d62289
      */
     public function auth()
     {}

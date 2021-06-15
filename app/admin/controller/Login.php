@@ -82,19 +82,11 @@ class Login extends AdminController
         if (is_numeric($found_key)) {
             $page_id = LoginPage::where('status', 1)->order('id', 'desc')->value('id');
             if (!$page_id) {
-<<<<<<< HEAD
                 $page_id = 2;
             }
             return $this->fetch('index' . $page_id);
         }
         return $this->fetch('index2');
-=======
-                $page_id = 1;
-            }
-            return $this->fetch('index' . $page_id);
-        }
-        return $this->fetch('index1');
->>>>>>> a45c881b3f81953d04d8835ae8f7848ae0d62289
     }
 
     /**

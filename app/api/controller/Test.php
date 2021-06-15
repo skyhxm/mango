@@ -10,14 +10,7 @@ use hg\apidoc\annotation as Apidoc;
  */
 class Test extends Api
 {
-<<<<<<< HEAD
 
-=======
-    /**
-     * @Apidoc\Title("测试接口")
-     * ...
-     */
->>>>>>> a45c881b3f81953d04d8835ae8f7848ae0d62289
     public function index()
     {
 

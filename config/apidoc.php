@@ -30,11 +30,7 @@ return [
         // 是否开启缓存
         'enable' => false,
         // 缓存文件路径
-<<<<<<< HEAD
         'path'   => './runtime/apidoc/',
-=======
-        'path'   => '../runtime/apidoc/',
->>>>>>> a45c881b3f81953d04d8835ae8f7848ae0d62289
         // 是否显示更新缓存按钮
         'reload' => true,
         // 最大缓存文件数
@@ -43,11 +39,7 @@ return [
     // 权限认证配置
     'auth'               => [
         // 是否启用密码验证
-<<<<<<< HEAD
         'enable'     => false,
-=======
-        'enable'     => true,
->>>>>>> a45c881b3f81953d04d8835ae8f7848ae0d62289
         // 验证密码
         'password'   => "123456",
         // 密码加密盐
