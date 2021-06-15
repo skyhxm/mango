@@ -98,7 +98,7 @@
         }
         $('.send').click(function(){
             //判断邮箱
-            var email = $(".email").val();
+            var email = $("#email").val();
             if(!email){
                 return layer.msg('邮箱不能为空');
             }
