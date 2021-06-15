@@ -5,12 +5,17 @@ use app\api\common\controller\Api;
 use hg\apidoc\annotation as Apidoc;
 
 /**
+<<<<<<< HEAD
  * @Apidoc\Title("基础示例")
+=======
+ * @Apidoc\Title("controller")
+>>>>>>> a45c881b3f81953d04d8835ae8f7848ae0d62289
  * @Apidoc\Group("api")
  */
 class Index extends Api
 {
     protected $noNeedLogin = ['*'];
+<<<<<<< HEAD
 
     /** function index1()
      * @Apidoc\Title("")
@@ -303,3 +308,8 @@ class Index extends Api
 	} // function index()
 
 }
+=======
+    protected $noNeedRight = '*';
+
+}
+>>>>>>> a45c881b3f81953d04d8835ae8f7848ae0d62289
