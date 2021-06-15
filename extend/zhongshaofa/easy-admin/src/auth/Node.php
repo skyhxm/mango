@@ -115,7 +115,7 @@ class Node
     public function getNodelist()
     {
         list($nodeList, $controllerList) = [[], $this->getControllerList()];
-
+        unset($controllerList['system.plugin']);
         if (!empty($controllerList)) {
             AnnotationRegistry::registerLoader('class_exists');
             $reader = new FileCacheReader(new AnnotationReader(), $this->annotationCacheDir, $this->annotationDebug);
