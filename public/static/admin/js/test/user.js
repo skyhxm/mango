@@ -17,7 +17,7 @@ define(["jquery", "easy-admin"], function ($, ea) {
             ea.table.render({
                 init: init,
                 cols: [[
-                    {type: 'checkbox'},                    {field: 'id', title: 'id'},                    {field: 'name', title: 'mingcheng'},                    {field: 'user_id', title: 'user_id'},                    {field: 'testUserPro.name', title: 'mingcheng'},                    {width: 250, title: '操作', templet: ea.table.tool},
+                    {type: 'checkbox'},                    {field: 'id', title: 'id'},                    {field: 'name', title: 'mingcheng'},                    {field: 'user_id', title: 'user_id'},                    {width: 250, title: '操作', templet: ea.table.tool},
                 ]],
             });
 

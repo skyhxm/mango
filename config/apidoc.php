@@ -7,17 +7,20 @@ return [
     // 版权申明
     'copyright'          => 'Powered By hg-code',
     // 默认作者
-    'default_author'     => '',
+    'default_author'     => 'mango',
     // 默认请求类型
-    'default_method'     => 'GET',
+    'default_method'     => 'POST',
     // 设置应用/版本（必须设置）
     'apps'               => [
         ['title' => 'v1.0', 'path' => 'app\api\controller', 'folder' => 'v1'],
     ],
     // 控制器分组
-    'groups'             => [],
+    'groups'             => [
+        ['title' => '基础模块', 'name' => 'base'],
+        ['title' => 'API', 'name' => 'api'],
+    ],
     // 指定公共注释定义的文件地址
-    'definitions'        => "app\controller\Definitions",
+    'definitions'        => "app\api\common\controller\Definitions",
     //指定生成文档的控制器
     'controllers'        => [],
     // 过滤，不解析的控制器
@@ -27,7 +30,7 @@ return [
         // 是否开启缓存
         'enable' => false,
         // 缓存文件路径
-        'path'   => '../runtime/apidoc/',
+        'path'   => './runtime/apidoc/',
         // 是否显示更新缓存按钮
         'reload' => true,
         // 最大缓存文件数
@@ -36,7 +39,7 @@ return [
     // 权限认证配置
     'auth'               => [
         // 是否启用密码验证
-        'enable'     => true,
+        'enable'     => false,
         // 验证密码
         'password'   => "123456",
         // 密码加密盐
@@ -49,7 +52,8 @@ return [
     // 统一的请求响应体，仅显示在文档提示中
     'responses'          => [
         ['name' => 'code', 'desc' => '状态码', 'type' => 'int'],
-        ['name' => 'message', 'desc' => '操作描述', 'type' => 'string'],
+        ['name' => 'msg', 'desc' => '操作描述', 'type' => 'string'],
+        ['name' => 'time', 'desc' => '时间', 'type' => 'string'],
         ['name' => 'data', 'desc' => '业务数据', 'main' => true, 'type' => 'object'],
     ],
     // md文档

@@ -28,8 +28,14 @@
 
 * GitHub地址：[https://github.com/skyhxm/mango](https://github.com/skyhxm/mango)
 
-* Gitee地址：[https://github.com/skyhxm/mango](https://github.com/skyhxm/mango)
+* Gitee地址：[https://gitee.com/ruanzubao/mango](https://gitee.com/ruanzubao/mango)
+(推荐)
 
+## 系统截图
+![Mango-sys](public/static/common/images/sys1.png)
+![Mango-sys](public/static/common/images/sys2.png)
+![Mango-sys](public/static/common/images/sys3.png)
+![Mango-sys](public/static/common/images/sys4.png)
 
 ## 项目特性
 * 快速CURD命令行
